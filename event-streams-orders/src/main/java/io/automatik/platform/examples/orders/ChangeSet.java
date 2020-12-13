@@ -1,0 +1,30 @@
+package io.automatik.platform.examples.orders;
+
+public class ChangeSet {
+
+    private Order order;
+
+    private Item item;
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    @Override
+    public String toString() {
+        return "ChangeSet [order=" + order + ", item=" + item + "]";
+    }
+
+}

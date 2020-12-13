@@ -1,0 +1,29 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.automatik.examples</groupId>
+  <artifactId>automatik-examples</artifactId>
+  <version>0.0.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Automatik :: Examples</name>
+  <description>Complete examples for Automatik use cases</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.target>11</maven.compiler.target>
+    <maven.compiler.source>11</maven.compiler.source>
+
+    <quarkus.version>1.10.2.Final</quarkus.version>
+    <automatik.version>0.0.0-SNAPSHOT</automatik.version>
+    <wiremock.version>2.27.2</wiremock.version>
+
+    <swagger-plugin.version>2.1.0</swagger-plugin.version>
+    <version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
+  </properties>
+
+  <modules>
+    <module>event-streams-orders</module>
+  </modules>
+</project>
