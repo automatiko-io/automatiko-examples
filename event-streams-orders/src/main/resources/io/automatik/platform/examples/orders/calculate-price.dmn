@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:feel="https://www.omg.org/spec/DMN/20191111/FEEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:drools="http://www.drools.org/kie/dmn/1.1" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:ns2="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisofeed="http://trisotech.com/feed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dmn11="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:ns1="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"                   xmlns="https://kiegroup.org/dmn/_D68D0A24-E6B4-4DD1-898C-A0FEEB835787" id="_8F6B879B-4478-4D65-A3E3-6DF190456159" name="calculate-price" namespace="https://kiegroup.org/dmn/_D68D0A24-E6B4-4DD1-898C-A0FEEB835787" exporter="Decision Modeler" exporterVersion="7.2.0" triso:logoChoice="Default">
+    <semantic:extensionElements/>
+    <semantic:itemDefinition id="_6C05DD4A-D885-49A5-8856-1370BCD5DA7A" name="Item" label="Item" isCollection="false">
+        <semantic:itemComponent id="_94DA97D2-DE7B-49F1-B615-DB3B69D63BEA" name="articleId" isCollection="false">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_89B78D1A-5BDF-4B7D-93D6-2E57EB3ECDB4" name="name" isCollection="false">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_9DADD783-B06F-453B-A5DD-602D5551D229" name="price" isCollection="false">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_13FC79B0-F219-4C50-AA03-431850F646DD" name="quantity" isCollection="false">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_15d1a1d0-2e9d-42d5-947c-b22a83c02621" name="totalPrice" isCollection="false">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+    </semantic:itemDefinition>
+    <semantic:itemDefinition id="_F5923774-4F27-4D69-A810-04D5E67751AF" name="Items" label="Items" isCollection="true">
+        <semantic:typeRef>Item</semantic:typeRef>
+    </semantic:itemDefinition>
+    <semantic:decisionService id="_8F6B879B-4478-4D65-A3E3-6DF190456159_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true" triso:wholeModelService="true">
+        <semantic:variable name="Whole Model Decision Service" id="_8F6B879B-4478-4D65-A3E3-6DF190456159_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_BA42894F-CF8C-474C-90F8-1261A10FCB67"/>
+        <semantic:inputData href="#_52178A21-AD99-4208-AE7B-5D8C5AF0E203"/>
+        <semantic:inputData href="#_9b050769-6649-45c0-b109-30bdaf5c4bab"/>
+    </semantic:decisionService>
+    <semantic:decisionService id="_A35466D1-3FD0-4316-84C5-852E3BA27066_DS" name="Diagram DRG" triso:dynamicDecisionService="true">
+        <semantic:variable name="Diagram DRG" id="_A35466D1-3FD0-4316-84C5-852E3BA27066_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_BA42894F-CF8C-474C-90F8-1261A10FCB67"/>
+        <semantic:inputData href="#_52178A21-AD99-4208-AE7B-5D8C5AF0E203"/>
+        <semantic:inputData href="#_9b050769-6649-45c0-b109-30bdaf5c4bab"/>
+    </semantic:decisionService>
+    <semantic:decisionService id="_EF2511EF-D597-4A7E-A463-4D2BC6D8029C_DS" name="Diagram newdiagram" triso:dynamicDecisionService="true">
+        <semantic:variable name="Diagram newdiagram" id="_EF2511EF-D597-4A7E-A463-4D2BC6D8029C_DS_VAR" typeRef="Any"/>
+    </semantic:decisionService>
+    <semantic:inputData id="_52178A21-AD99-4208-AE7B-5D8C5AF0E203" name="items">
+        <semantic:variable name="items" id="_364D874E-3EB2-487C-BF14-CE468909E548" typeRef="Items"/>
+    </semantic:inputData>
+    <semantic:decision id="_BA42894F-CF8C-474C-90F8-1261A10FCB67" name="Calculate total amount" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="totalAmount" id="_97DABDF3-6204-41B9-9BE6-922DB37C611C" typeRef="Any"/>
+        <semantic:informationRequirement id="_BDB6FE55-4371-4237-B0FD-9100544227D6">
+            <semantic:requiredInput href="#_52178A21-AD99-4208-AE7B-5D8C5AF0E203"/>
+        </semantic:informationRequirement>
+        <semantic:informationRequirement id="_e4dc703d-ddc1-4216-a22b-a90597ff11bd">
+            <semantic:requiredInput href="#_9b050769-6649-45c0-b109-30bdaf5c4bab"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression typeRef="Any" id="_C5A64EF9-6F8F-465F-89F9-B39356FB7022" triso:expressionId="_8310c74f-8460-42ef-9911-f0ec5aee5618" triso:descriptionVisible="false">
+            <semantic:text>if count(items) &gt; 0 then if discount &gt; 0 then sum(items.totalPrice) - (sum(items.totalPrice) * discount) else sum(items.totalPrice) else 0</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <semantic:inputData id="_9b050769-6649-45c0-b109-30bdaf5c4bab" name="discount">
+        <semantic:variable name="discount" id="_c9559de6-baca-49c7-89e1-498dfa585817" typeRef="number"/>
+    </semantic:inputData>
+    <dmndi:DMNDI>
+        <dmndi:DMNDiagram id="_A35466D1-3FD0-4316-84C5-852E3BA27066" triso:modelElementRef="_84b4542a-399a-4af0-985f-2d23842d5f2e" name="DRG">
+            <di:extension>
+                <kie:ComponentsWidthsExtension>
+                    <kie:ComponentWidths dmnElementRef="_C5A64EF9-6F8F-465F-89F9-B39356FB7022">
+                        <kie:width>300</kie:width>
+                    </kie:ComponentWidths>
+                </kie:ComponentsWidthsExtension>
+            </di:extension>
+            <dmndi:Size height="1050" width="1485"/>
+            <dmndi:DMNShape id="dmnshape-drg-_52178A21-AD99-4208-AE7B-5D8C5AF0E203" dmnElementRef="_52178A21-AD99-4208-AE7B-5D8C5AF0E203">
+                <dc:Bounds x="385" y="317" width="100" height="50"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="dmnshape-drg-_BA42894F-CF8C-474C-90F8-1261A10FCB67" dmnElementRef="_BA42894F-CF8C-474C-90F8-1261A10FCB67">
+                <dc:Bounds x="565" y="317" width="100" height="50"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_0"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_7fd04581-423e-46de-869b-a85dab70d2af" dmnElementRef="_9b050769-6649-45c0-b109-30bdaf5c4bab">
+                <dc:Bounds x="381.2588291168213" y="228" width="107.48234176635742" height="47.599860040084195"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNEdge id="dmnedge-drg-_BDB6FE55-4371-4237-B0FD-9100544227D6" dmnElementRef="_BDB6FE55-4371-4237-B0FD-9100544227D6" sourceElement="dmnshape-drg-_52178A21-AD99-4208-AE7B-5D8C5AF0E203" targetElement="dmnshape-drg-_BA42894F-CF8C-474C-90F8-1261A10FCB67">
+                <di:waypoint x="485" y="342"/>
+                <di:waypoint x="565" y="342"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_4344ef45-c26c-47aa-bd79-7da7c2d0c287" dmnElementRef="_e4dc703d-ddc1-4216-a22b-a90597ff11bd" sourceElement="_7fd04581-423e-46de-869b-a85dab70d2af" targetElement="dmnshape-drg-_BA42894F-CF8C-474C-90F8-1261A10FCB67">
+                <di:waypoint x="488.7411708831787" y="251.7999300200421"/>
+                <di:waypoint x="601.9281045751634" y="317"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1"/>
+            </dmndi:DMNEdge>
+        </dmndi:DMNDiagram>
+        <dmndi:DMNDiagram id="_EF2511EF-D597-4A7E-A463-4D2BC6D8029C" triso:modelElementRef="_a00d84da-c7ab-4057-952b-a37728fbb681" name="new-diagram">
+            <di:extension>
+                <kie:ComponentsWidthsExtension/>
+            </di:extension>
+        </dmndi:DMNDiagram>
+        <dmndi:DMNStyle id="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+        <dmndi:DMNStyle id="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+    </dmndi:DMNDI>
+</semantic:definitions>

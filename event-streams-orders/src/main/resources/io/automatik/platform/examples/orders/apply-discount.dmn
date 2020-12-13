@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:triso="http://www.trisotech.com/2015/triso/modeling" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn" xmlns:feel="https://www.omg.org/spec/DMN/20191111/FEEL/" xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase" xmlns:drools="http://www.drools.org/kie/dmn/1.1" xmlns:openapi="https://openapis.org/omg/extension/1.0" xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:ns2="https://www.trisotech.com/spec/DMN/20191111/EXT/" xmlns:rss="http://purl.org/rss/2.0/" xmlns:trisofeed="http://trisotech.com/feed" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dmn11="http://www.omg.org/spec/DMN/20151101/dmn.xsd" xmlns:kie="http://www.drools.org/kie/dmn/1.2" xmlns:ns1="http://www.omg.org/spec/DMN/20180521/FEEL/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"                   xmlns="https://kiegroup.org/dmn/_D68D0A24-E6B4-4DD1-898C-A0FEEB835787" id="_8F6B879B-4478-4D65-A3E3-6DF190456159" name="apply-discount" namespace="https://kiegroup.org/dmn/_D68D0A24-E6B4-4DD1-898C-A0FEEB835787" exporter="Decision Modeler" exporterVersion="7.2.0" triso:logoChoice="Default">
+    <semantic:extensionElements/>
+    <semantic:itemDefinition id="_6C05DD4A-D885-49A5-8856-1370BCD5DA7A" name="Item" label="Item" isCollection="true">
+        <semantic:itemComponent id="_94DA97D2-DE7B-49F1-B615-DB3B69D63BEA" name="articleId" isCollection="false">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_89B78D1A-5BDF-4B7D-93D6-2E57EB3ECDB4" name="name" isCollection="false">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_9DADD783-B06F-453B-A5DD-602D5551D229" name="price" isCollection="false">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_13FC79B0-F219-4C50-AA03-431850F646DD" name="quantity" isCollection="false">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+    </semantic:itemDefinition>
+    <semantic:decisionService id="_8F6B879B-4478-4D65-A3E3-6DF190456159_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true" triso:wholeModelService="true">
+        <semantic:variable name="Whole Model Decision Service" id="_8F6B879B-4478-4D65-A3E3-6DF190456159_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE"/>
+        <semantic:inputData href="#_975c5a09-966d-4304-a794-4b5e79382669"/>
+    </semantic:decisionService>
+    <semantic:decisionService id="_A35466D1-3FD0-4316-84C5-852E3BA27066_DS" name="Diagram DRG" triso:dynamicDecisionService="true">
+        <semantic:variable name="Diagram DRG" id="_A35466D1-3FD0-4316-84C5-852E3BA27066_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE"/>
+        <semantic:inputData href="#_975c5a09-966d-4304-a794-4b5e79382669"/>
+    </semantic:decisionService>
+    <semantic:decision id="_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE" name="discount" triso:useOutputTypeAsAnswer="false">
+        <semantic:variable name="discount" id="_2A47D63A-4C1C-4A71-958F-ABA5B73B0584" typeRef="Item"/>
+        <semantic:informationRequirement id="_06c4d202-1c01-439b-98a4-8921cdf8dce4">
+            <semantic:requiredInput href="#_975c5a09-966d-4304-a794-4b5e79382669"/>
+        </semantic:informationRequirement>
+        <semantic:knowledgeRequirement id="_0ccaba2d-9def-47b2-92a7-c0d3814b389b">
+            <semantic:requiredKnowledge href="#_eda52378-4a20-4bb1-9665-749035802f76"/>
+        </semantic:knowledgeRequirement>
+        <semantic:context id="_af7193c3-03b0-4514-b87e-81a3de3881bc" triso:descriptionVisible="false" typeRef="Item" triso:expressionId="_49b8f199-be01-4aa7-95e6-d88dfb4747f1">
+            <semantic:contextEntry id="_e4ab960c-b68e-479e-9c96-10efc08c5ed5">
+                <semantic:variable name="discounts" id="_2bf2eced-59ad-45d9-a81c-c684bf176ff8" typeRef="number"/>
+                <semantic:literalExpression id="_9975d45a-f5ac-431d-8585-458f0c50be22" triso:descriptionVisible="false">
+                    <semantic:text>for i in items return calculated discounts(i.name, i.price, i.quantity)</semantic:text>
+                </semantic:literalExpression>
+            </semantic:contextEntry>
+            <semantic:contextEntry id="_e619f910-7550-46a5-8af3-94378a9c0838">
+                <semantic:literalExpression id="_361de284-7b35-47d2-baeb-5636a1160849">
+                    <semantic:text>max(discounts)</semantic:text>
+                </semantic:literalExpression>
+            </semantic:contextEntry>
+        </semantic:context>
+    </semantic:decision>
+    <semantic:businessKnowledgeModel id="_eda52378-4a20-4bb1-9665-749035802f76" name="calculated discounts">
+        <semantic:description>&lt;p&gt;Description visible&lt;/p&gt;</semantic:description>
+        <semantic:variable name="calculated discounts" id="_95b7b2cc-73dd-49c0-a46b-cbf67948841f" typeRef="Item"/>
+        <semantic:encapsulatedLogic typeRef="Item" triso:descriptionVisible="false" triso:expressionId="_ce1d3a77-b49c-4d7b-8160-360645a0ba52">
+            <semantic:formalParameter name="name" typeRef="string"/>
+            <semantic:formalParameter name="price" typeRef="number"/>
+            <semantic:formalParameter name="quantity" typeRef="number"/>
+            <semantic:decisionTable id="_72bd921c-2149-487f-b8d9-10b312c049f6" hitPolicy="FIRST" outputLabel="calculated discounts" typeRef="Item">
+                <semantic:input id="_7f40d093-b183-4ac8-80b5-0d49278d69ba" label="name">
+                    <semantic:inputExpression typeRef="string">
+                        <semantic:text>name</semantic:text>
+                    </semantic:inputExpression>
+                </semantic:input>
+                <semantic:input id="_f5227cb4-70fa-455d-95a0-226e6413a891" label="price">
+                    <semantic:inputExpression typeRef="number">
+                        <semantic:text>price</semantic:text>
+                    </semantic:inputExpression>
+                </semantic:input>
+                <semantic:input id="_3bfd86e5-cc69-40c6-8922-1ca96a684b97" label="quantity">
+                    <semantic:inputExpression typeRef="number">
+                        <semantic:text>quantity</semantic:text>
+                    </semantic:inputExpression>
+                </semantic:input>
+                <semantic:output id="_744f1039-c097-468a-a809-d7d6cec125a8" triso:allowNull="true"/>
+                <semantic:annotation name="description"/>
+                <semantic:rule id="_2762e48d-25cc-47ed-b8c4-8603d8facf07">
+                    <semantic:inputEntry id="_bcad4b53-cc5f-444f-b073-764e0986a3fd">
+                        <semantic:text>? = "pen"</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:inputEntry id="_d91f4729-a13b-42c4-a827-5700552b35ac">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:inputEntry id="_282b0f1c-00b1-4ec0-9405-1decf72e3541">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:outputEntry id="_4066d715-13ed-4d0a-83bb-33c1c90cebec">
+                        <semantic:text>0.1</semantic:text>
+                    </semantic:outputEntry>
+                    <semantic:annotationEntry>
+                        <semantic:text>10 % of the price</semantic:text>
+                    </semantic:annotationEntry>
+                </semantic:rule>
+                <semantic:rule id="_d42f65ec-797a-46af-be50-08a991ba4045">
+                    <semantic:inputEntry id="_86c97df3-9d88-4eec-b393-bb37cef130ec">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:inputEntry id="_71f49ec8-36d9-4709-a69d-1b3e18b548c5">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:inputEntry id="_d8926a8d-9aa5-49b4-aec4-4d05feca99b9">
+                        <semantic:text>? &gt; 10</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:outputEntry id="_58c13bc3-7529-4318-91f5-d3086ba62cfa">
+                        <semantic:text>0.2</semantic:text>
+                    </semantic:outputEntry>
+                    <semantic:annotationEntry>
+                        <semantic:text>20 % of the price</semantic:text>
+                    </semantic:annotationEntry>
+                </semantic:rule>
+                <semantic:rule id="_a5ef13cf-a518-4d11-a089-b5600c31c4c6">
+                    <semantic:inputEntry id="_8ca857df-f413-49e2-b3cd-f902bc198a08">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:inputEntry id="_b6d064f3-0b38-44d1-9303-30c9df00a04b">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:inputEntry id="_0e0e54a7-fa2e-4349-ba3e-acb1174a2699">
+                        <semantic:text>-</semantic:text>
+                    </semantic:inputEntry>
+                    <semantic:outputEntry id="_eb2819b2-7113-4126-a0c4-035c380b1610">
+                        <semantic:text>0</semantic:text>
+                    </semantic:outputEntry>
+                    <semantic:annotationEntry>
+                        <semantic:text>no discount</semantic:text>
+                    </semantic:annotationEntry>
+                </semantic:rule>
+            </semantic:decisionTable>
+        </semantic:encapsulatedLogic>
+    </semantic:businessKnowledgeModel>
+    <semantic:inputData id="_975c5a09-966d-4304-a794-4b5e79382669" name="items">
+        <semantic:variable name="items" id="_dc9d14b9-22d0-4f97-a65e-b95ac439ac10" typeRef="Item"/>
+    </semantic:inputData>
+    <dmndi:DMNDI>
+        <dmndi:DMNDiagram id="_A35466D1-3FD0-4316-84C5-852E3BA27066" triso:modelElementRef="_361e3a81-6721-4698-90ce-e600b9a2a305" name="DRG">
+            <di:extension>
+                <kie:ComponentsWidthsExtension>
+                    <kie:ComponentWidths dmnElementRef="_6DF826D4-6505-46E8-B5F0-AEB7F622B1E3">
+                        <kie:width>50</kie:width>
+                        <kie:width>100</kie:width>
+                        <kie:width>100</kie:width>
+                        <kie:width>100</kie:width>
+                        <kie:width>100</kie:width>
+                        <kie:width>100</kie:width>
+                    </kie:ComponentWidths>
+                </kie:ComponentsWidthsExtension>
+            </di:extension>
+            <dmndi:Size height="1050" width="1485"/>
+            <dmndi:DMNShape id="dmnshape-drg-_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE" dmnElementRef="_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE">
+                <dc:Bounds x="386" y="161" width="100" height="50"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_600c4f43-e9ce-45c0-8da1-24a19c7cb755" dmnElementRef="_eda52378-4a20-4bb1-9665-749035802f76">
+                <dc:Bounds x="541" y="156" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_d9ed3494-4c03-448e-a9fe-f05d1164a7ed" dmnElementRef="_975c5a09-966d-4304-a794-4b5e79382669">
+                <dc:Bounds x="368.2588291168213" y="294" width="135.48234176635742" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNEdge id="_ba4abf9a-0bc3-456f-809b-0b4a468d1865" dmnElementRef="_0ccaba2d-9def-47b2-92a7-c0d3814b389b" sourceElement="_600c4f43-e9ce-45c0-8da1-24a19c7cb755" targetElement="dmnshape-drg-_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE">
+                <di:waypoint x="541" y="186"/>
+                <di:waypoint x="486" y="186"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_a05f4b34-8582-4b12-bf48-23caf34a0370" dmnElementRef="_06c4d202-1c01-439b-98a4-8921cdf8dce4" sourceElement="_d9ed3494-4c03-448e-a9fe-f05d1164a7ed" targetElement="dmnshape-drg-_5D60AE2B-D336-4E8A-8AD3-15A58CCAA5CE">
+                <di:waypoint x="435.9968013763428" y="294"/>
+                <di:waypoint x="436" y="211"/>
+                <dmndi:DMNLabel sharedStyle="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1"/>
+            </dmndi:DMNEdge>
+        </dmndi:DMNDiagram>
+        <dmndi:DMNStyle id="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+        <dmndi:DMNStyle id="LS_8F6B879B-4478-4D65-A3E3-6DF190456159_1" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+    </dmndi:DMNDI>
+</semantic:definitions>
