@@ -715,9 +715,6 @@ kcontext.setVariable(&quot;order&quot;, order);</bpmn2:script>
     <bpmn2:sequenceFlow id="SequenceFlow_45" automatik:priority="1" sourceRef="BusinessRuleTask_2" targetRef="ServiceTask_2"/>
     <bpmn2:dataObject id="discount" name="discount" itemSubjectRef="ItemDefinition_2073">
       <bpmn2:extensionElements>
-        <automatik:metaData name="tags">
-          <automatik:metaValue><![CDATA[internal]]></automatik:metaValue>
-        </automatik:metaData>
         <automatik:metaData name="value">
           <automatik:metaValue><![CDATA[0]]></automatik:metaValue>
         </automatik:metaData>
@@ -1030,7 +1027,7 @@ internal data model not exposed via service api</bpmn2:text>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_IntermediateThrowEvent_1" bpmnElement="IntermediateThrowEvent_1">
         <dc:Bounds height="36.0" width="36.0" x="900.0" y="212.0"/>
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel id="BPMNLabel_46">
           <dc:Bounds height="11.0" width="73.0" x="882.0" y="248.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
@@ -1403,7 +1400,7 @@ internal data model not exposed via service api</bpmn2:text>
         <di:waypoint xsi:type="dc:Point" x="936.0" y="230.0"/>
         <di:waypoint xsi:type="dc:Point" x="961.0" y="230.0"/>
         <di:waypoint xsi:type="dc:Point" x="987.0" y="230.0"/>
-        <bpmndi:BPMNLabel/>
+        <bpmndi:BPMNLabel id="BPMNLabel_91"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
