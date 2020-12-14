@@ -4,7 +4,7 @@ Overview this is an example showing event stream use cases backed by workflow. I
 
 ## Run it
 
-The only think that is needed is Apache Kafka running that will be accessible. It needs to be given as part of run command via environment variable `KAFKA_SERVERS`
+The only thing that is needed is Apache Kafka running that will be accessible. It needs to be given as part of run command via environment variable `KAFKA_SERVERS`
 
 `docker run -e KAFKA_SERVERS=KAFKA_HOST:9092 -p 8080:8080 mswiderski/event-streams-orders`
 
@@ -28,9 +28,10 @@ Below is an example that runs through "happy path" to create order, add bunch of
 
 ###  Create new order
 
-Topic `orders`
-Set record key to `ORDER-1`
-Set the record value to 
+- Topic `orders`
+- Set record key to `ORDER-1`
+- Set the record value to 
+
 ````
 {
   "order": {
@@ -55,9 +56,10 @@ Set the record value to
 
 ### Add items to the order
 
-Topic `orders`
-Set record key to `ORDER-1`
-Set record value to
+- Topic `orders`
+- Set record key to `ORDER-1`
+- Set record value to
+
 ````
 {
   "item" : {
@@ -76,9 +78,10 @@ if the quantity is set to 0 then it is completely removed from the order
 
 ### Place the order
 
-Topic `orders`
-Set record key to `ORDER-1`
-Set record value to
+- Topic `orders`
+- Set record key to `ORDER-1`
+- Set record value to
+
 ````
 {
   "order": {
@@ -103,9 +106,9 @@ Set record value to
 
 ### Ship the order
 
-Topic `orders`
-Set record key to `ORDER-1`
-Set record value to
+- Topic `orders`
+- Set record key to `ORDER-1`
+- Set record value to
 
 ````
 {
@@ -135,9 +138,9 @@ This will complete the process of `ORDER-1`
 
 In addition at any time order can be cancelled by
 
-Topic `orders`
-Set record key to `ORDER-1`
-Set record value to
+- Topic `orders`
+- Set record key to `ORDER-1`
+- Set record value to
 
 ````
 {
@@ -163,9 +166,9 @@ Set record value to
 
 Since orders are placed by customers, their address can change so at any time customer address can be changed by publishing another record to customers topic
 
-Topic `customers`
-Set record key to `john@doe.org` (email address of the customer)
-Set record value to
+- Topic `customers`
+- Set record key to `john@doe.org` (email address of the customer)
+- Set record value to
 
 ````
 {
@@ -181,3 +184,40 @@ Set record value to
     }
 }
 ````
+
+
+# Build from source
+
+Building from source is just a matter to run maven commands. Though first and foremost is to select what should be built
+
+## Build in development mode
+
+Building in development mode allow to run the application and make modifications to t without restarting it.
+
+`mvn clean quarkus:dev`
+
+## Building executable jar
+
+Building as executable jar allow to run the application is standalone mode.
+
+`mvn clean package`
+
+## Building native image
+
+Building native image allows to build single executable binary file containing everything that application needs, including JDK classes.
+
+`mvn clean package -Pnative`
+
+NOTE: this requires GraalVM installation and it rather heavy operation.
+
+## Building container image (with executable jar)
+
+Building container image allows to build the application once and deploy it to any conainer runtime.
+
+`mvn clean package -Pcontainer`
+
+## Building for Kubernetes
+
+Building for Kubernetes allows easy deployment to Kubernetes environment. It will build container and generate deployment files (json and yaml) for simple deployment to Kubernetes.
+
+`mvn clean package -Pkubernetes`

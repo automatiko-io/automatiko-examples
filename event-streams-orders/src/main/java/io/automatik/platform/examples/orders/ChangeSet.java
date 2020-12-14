@@ -1,5 +1,8 @@
 package io.automatik.platform.examples.orders;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
+@RegisterForReflection(classNames = { "java.util.Date", "io.automatik.platform.examples.orders.ChangeSet" })
 public class ChangeSet {
 
     private Order order;
