@@ -1,12 +1,16 @@
 # Event stream example
 
-Overview this is an example showing event stream use cases backed by workflow. It uses Automatik project to build self described service that makes use of Apache Kafka as event source.
+## Overview 
+
+this is an example showing event stream use cases backed by workflow. It uses Automatik project to build self described service that makes use of Apache Kafka as event source.
+
+See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/orders.html)
 
 ## Run it
 
 The only thing that is needed is Apache Kafka running that will be accessible. It needs to be given as part of run command via environment variable `KAFKA_SERVERS`
 
-`docker run -e KAFKA_SERVERS=KAFKA_HOST:9092 -p 8080:8080 mswiderski/event-streams-orders`
+`docker run -e KAFKA_SERVERS=KAFKA_HOST:9092 -p 8080:8080 automatik/event-streams-orders`
 
 once this is done you can see the fully described service at:
 
@@ -18,7 +22,7 @@ http://localhost:8080/management/processes/ui
 
 ## Use it
 
-This sample service utilises both Key and value of the Kafka Record. Key is used to uniquely identify order so it should be sort of an identifier of the order such as `ORDER-XXX` where XXX is sequence number. Value is actual payload that can be
+This sample service utilizes both Key and value of the Kafka Record. Key is used to uniquely identify order so it should be sort of an identifier of the order such as `ORDER-XXX` where XXX is sequence number. Value is actual payload that can be
 
 - order information
 - order item information
