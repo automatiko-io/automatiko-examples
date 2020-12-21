@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="https://www.omg.org/spec/DMN/20191111/MODEL/"  xmlns:triso="http://www.trisotech.com/2015/triso/modeling"  xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"  xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/"  xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"  xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn"  xmlns:feel="https://www.omg.org/spec/DMN/20191111/FEEL/"  xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase"  xmlns:drools="http://www.drools.org/kie/dmn/1.1"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:rss="http://purl.org/rss/2.0/"  xmlns:openapi="https://openapis.org/omg/extension/1.0"  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/"  xmlns="http://www.trisotech.com/definitions/_bb6e6fef-cffc-4b50-8ae1-8d91af080caa" id="_bb6e6fef-cffc-4b50-8ae1-8d91af080caa" name="leak-calculation" namespace="http://www.trisotech.com/definitions/_bb6e6fef-cffc-4b50-8ae1-8d91af080caa" exporter="Decision Modeler" exporterVersion="7.2.0" triso:logoChoice="Default">
+    <semantic:extensionElements/>
+    <semantic:itemDefinition name="tMeasurements" label="tMeasurements" isCollection="true">
+        <semantic:itemComponent id="_753afd92-fd30-486d-b1a0-53c0dde03e34" name="value">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_554a06e6-1c77-45cb-82b5-5ab7d6ef8d71" name="timestamp">
+            <semantic:typeRef>number</semantic:typeRef>
+        </semantic:itemComponent>
+    </semantic:itemDefinition>
+    <semantic:decisionService id="_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true" triso:wholeModelService="true">
+        <semantic:variable name="Whole Model Decision Service" id="_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_4b7018cf-83ef-4719-9aa1-cc7fe033599a"/>
+        <semantic:outputDecision href="#_c478713c-498e-4fd2-b9af-62b771011c2f"/>
+        <semantic:outputDecision href="#_262ae8c0-e238-4cbb-a825-ab5b68d941f9"/>
+        <semantic:outputDecision href="#_36eb5e08-3849-4bcd-9b78-03b96d97b639"/>
+        <semantic:inputData href="#_dddcedd4-ccdc-4918-a35e-2e1650a99465"/>
+    </semantic:decisionService>
+    <semantic:decisionService id="_fcf59738-c85a-44bb-9b71-4fa45e6535a7_DS" name="Diagram Calculation" triso:dynamicDecisionService="true">
+        <semantic:variable name="Diagram Calculation" id="_fcf59738-c85a-44bb-9b71-4fa45e6535a7_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_4b7018cf-83ef-4719-9aa1-cc7fe033599a"/>
+        <semantic:outputDecision href="#_c478713c-498e-4fd2-b9af-62b771011c2f"/>
+        <semantic:outputDecision href="#_262ae8c0-e238-4cbb-a825-ab5b68d941f9"/>
+        <semantic:outputDecision href="#_36eb5e08-3849-4bcd-9b78-03b96d97b639"/>
+        <semantic:inputData href="#_dddcedd4-ccdc-4918-a35e-2e1650a99465"/>
+    </semantic:decisionService>
+    <semantic:inputData id="_dddcedd4-ccdc-4918-a35e-2e1650a99465" name="measurements">
+        <semantic:variable name="measurements" id="_4b20fa91-fa3f-456d-9f5a-e05f9de22204" typeRef="tMeasurements"/>
+    </semantic:inputData>
+    <semantic:decision id="_4b7018cf-83ef-4719-9aa1-cc7fe033599a" name="leakDetected">
+        <semantic:variable name="leakDetected" id="_963ac949-84e0-491a-bc26-5dbaf2b56ec1" typeRef="boolean"/>
+        <semantic:informationRequirement id="_af5d8237-7189-4f25-b699-ef009ad60ef0">
+            <semantic:requiredInput href="#_dddcedd4-ccdc-4918-a35e-2e1650a99465"/>
+        </semantic:informationRequirement>
+        <semantic:decisionTable triso:descriptionVisible="false" id="_4fa34979-8042-47fe-8075-03838f161257" hitPolicy="UNIQUE" outputLabel="leakDetected" typeRef="boolean" triso:expressionId="_cef33bb7-73bc-468d-9ca1-5dcb03549e96">
+            <semantic:input id="_88572d39-c20c-4409-90f1-c1d7a5dc860f" label="measurements.value">
+                <semantic:inputExpression typeRef="number">
+                    <semantic:text>measurements.value</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:output id="_cd4a4658-d3c5-45be-b9f6-fc9eaeeb228f" triso:allowNull="true"/>
+            <semantic:annotation name="Description"/>
+            <semantic:rule id="_cf91f435-eec0-4124-9c04-da80115f4795">
+                <semantic:inputEntry id="_1b48a541-9dc0-4d9f-bacd-0318464d59b6">
+                    <semantic:text>max(?) &gt; 100</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_80ca9f75-49de-431c-bd5d-aeed339e1a75">
+                    <semantic:text>true</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_52227d40-1405-4675-ac2d-78ead91e35d4">
+                <semantic:inputEntry id="_5944c706-9de0-40f1-94ff-1034d16d984f">
+                    <semantic:text>max(?) &lt;= 100</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_4dc57968-78ec-4a0e-ae8d-70dbbee13345">
+                    <semantic:text>false</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+        </semantic:decisionTable>
+    </semantic:decision>
+    <semantic:decision id="_c478713c-498e-4fd2-b9af-62b771011c2f" name="calaculatedMin">
+        <semantic:variable name="calaculatedMin" id="_70c91dc4-c23c-4cf2-b7e1-72c4f8b0baf0" typeRef="Any"/>
+        <semantic:informationRequirement id="_3a7c5ce4-b8cf-4471-a345-7f742930e4d5">
+            <semantic:requiredInput href="#_dddcedd4-ccdc-4918-a35e-2e1650a99465"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression id="_c4e0c3b7-817b-444a-ae9b-d3de35f096f9" triso:descriptionVisible="false" typeRef="Any" triso:expressionId="_7a97e908-69ad-4427-a105-c4e0cf135bc7">
+            <semantic:text>min(measurements.value)</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <semantic:decision id="_262ae8c0-e238-4cbb-a825-ab5b68d941f9" name="average">
+        <semantic:variable name="average" id="_aac4fd08-c9cb-4279-9761-3cb56bcda126" typeRef="Any"/>
+        <semantic:informationRequirement id="_a50f1853-d365-4968-aeb3-e60c245ebc80">
+            <semantic:requiredInput href="#_dddcedd4-ccdc-4918-a35e-2e1650a99465"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression id="_9fedd98f-7940-4655-8bce-c37e14d69eb3" triso:descriptionVisible="false" typeRef="Any" triso:expressionId="_10a2b17f-71ed-411d-9fdf-f1270347f6a7">
+            <semantic:text>mean(measurements.value)</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <semantic:decision id="_36eb5e08-3849-4bcd-9b78-03b96d97b639" name="calaculatedMax">
+        <semantic:variable name="calaculatedMax" id="_f1fca6fe-e9ba-481f-8348-5d21682ad66e" typeRef="Any"/>
+        <semantic:informationRequirement id="_1543f2d2-a5f8-4f63-b654-6b01aa8bff0f">
+            <semantic:requiredInput href="#_dddcedd4-ccdc-4918-a35e-2e1650a99465"/>
+        </semantic:informationRequirement>
+        <semantic:literalExpression id="_e92176d2-314f-40ec-954f-fe770a06720f" triso:descriptionVisible="false" typeRef="Any" triso:expressionId="_ee59313a-aed8-4329-b91b-2ed5917ac574">
+            <semantic:text>max(measurements.value)</semantic:text>
+        </semantic:literalExpression>
+    </semantic:decision>
+    <dmndi:DMNDI>
+        <dmndi:DMNDiagram id="_fcf59738-c85a-44bb-9b71-4fa45e6535a7" triso:modelElementRef="_804cd74f-d990-41d3-9af3-8d4b6b888a52" name="Calculation">
+            <di:extension/>
+            <dmndi:Size height="1050" width="1485"/>
+            <dmndi:DMNShape id="_412462f4-6a33-4f47-babd-cb5183c95e51" dmnElementRef="_dddcedd4-ccdc-4918-a35e-2e1650a99465">
+                <dc:Bounds x="186.2588291168213" y="330" width="135.48234176635742" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_b2cb91e7-0f43-40f0-aaae-2ee5cc8e5f49" dmnElementRef="_4b7018cf-83ef-4719-9aa1-cc7fe033599a">
+                <dc:Bounds x="467.5" y="216" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_082b6f33-e649-4388-8993-65abcc4c97c1" dmnElementRef="_c478713c-498e-4fd2-b9af-62b771011c2f">
+                <dc:Bounds x="467.5" y="330" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_46088899-03e8-47f0-986b-6f6beb67e11d" dmnElementRef="_262ae8c0-e238-4cbb-a825-ab5b68d941f9">
+                <dc:Bounds x="467.5" y="451" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_dca3c934-117e-4e59-b790-49e1c23a6d52" dmnElementRef="_36eb5e08-3849-4bcd-9b78-03b96d97b639">
+                <dc:Bounds x="177.5" y="512" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNEdge id="_24891392-89e4-4bc4-878c-3e23b571b3c4" dmnElementRef="_af5d8237-7189-4f25-b699-ef009ad60ef0" sourceElement="_412462f4-6a33-4f47-babd-cb5183c95e51" targetElement="_b2cb91e7-0f43-40f0-aaae-2ee5cc8e5f49">
+                <di:waypoint x="253.99680137634277" y="330"/>
+                <di:waypoint x="467.5" y="246"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_f6acdbf7-914d-4bf9-a21a-52dee38dd545" dmnElementRef="_3a7c5ce4-b8cf-4471-a345-7f742930e4d5" sourceElement="_412462f4-6a33-4f47-babd-cb5183c95e51" targetElement="_082b6f33-e649-4388-8993-65abcc4c97c1">
+                <di:waypoint x="321.7411708831787" y="360"/>
+                <di:waypoint x="467.5" y="360"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_7b0e781b-32d5-40fd-b3c8-cea0260774ae" dmnElementRef="_a50f1853-d365-4968-aeb3-e60c245ebc80" sourceElement="_412462f4-6a33-4f47-babd-cb5183c95e51" targetElement="_46088899-03e8-47f0-986b-6f6beb67e11d">
+                <di:waypoint x="253.99680137634277" y="390"/>
+                <di:waypoint x="504" y="511"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0"/>
+            </dmndi:DMNEdge>
+            <dmndi:DMNEdge id="_1e314ecb-f7cc-4ff1-a9d0-a2aca252fc14" dmnElementRef="_1543f2d2-a5f8-4f63-b654-6b01aa8bff0f" sourceElement="_412462f4-6a33-4f47-babd-cb5183c95e51" targetElement="_dca3c934-117e-4e59-b790-49e1c23a6d52">
+                <di:waypoint x="253.99680137634277" y="390"/>
+                <di:waypoint x="254" y="512"/>
+                <dmndi:DMNLabel sharedStyle="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0"/>
+            </dmndi:DMNEdge>
+        </dmndi:DMNDiagram>
+        <dmndi:DMNStyle id="LS_bb6e6fef-cffc-4b50-8ae1-8d91af080caa_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+    </dmndi:DMNDI>
+</semantic:definitions>
