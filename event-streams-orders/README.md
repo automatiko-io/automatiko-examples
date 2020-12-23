@@ -2,7 +2,7 @@
 
 ## Overview 
 
-this is an example showing event stream use cases backed by workflow. It uses Automatik project to build self described service that makes use of Apache Kafka as event source.
+this is an example showing event stream use cases backed by workflow. It uses Automatiko project to build self described service that makes use of Apache Kafka as event source.
 
 See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/orders.html)
 

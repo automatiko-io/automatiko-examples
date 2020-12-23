@@ -4,21 +4,21 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <artifactId>automatik-examples</artifactId>
-    <groupId>io.automatik.examples</groupId>
+    <artifactId>automatiko-examples</artifactId>
+    <groupId>io.automatiko.examples</groupId>
     <version>0.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>event-streams-sensors</artifactId>
 
-  <name>Automatik Examples:: Event streams :: Sensors (MQTT)</name>
-  <description>Automatik Examples project showcasing sensor data processing as event stream with MQTT to detect leaks and anomalies</description>
+  <name>Automatiko Examples:: Event streams :: Sensors (MQTT)</name>
+  <description>Automatiko Examples project showcasing sensor data processing as event stream with MQTT to detect leaks and anomalies</description>
 
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.automatik.platform.quarkus</groupId>
-        <artifactId>automatik-quarkus-bom</artifactId>
-        <version>${automatik.version}</version>
+        <groupId>io.automatiko.quarkus</groupId>
+        <artifactId>automatiko-quarkus-bom</artifactId>
+        <version>${automatiko.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -27,16 +27,16 @@
 
   <dependencies>
     <dependency>
-      <groupId>io.automatik.platform.quarkus</groupId>
-      <artifactId>automatik-quarkus</artifactId>
+      <groupId>io.automatiko.quarkus</groupId>
+      <artifactId>automatiko-quarkus</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.automatik.platform.addons</groupId>
-      <artifactId>automatik-filesystem-persistence-addon</artifactId>
+      <groupId>io.automatiko.addons</groupId>
+      <artifactId>automatiko-filesystem-persistence-addon</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.automatik.platform.addons</groupId>
-      <artifactId>automatik-process-management-addon</artifactId>
+      <groupId>io.automatiko.addons</groupId>
+      <artifactId>automatiko-process-management-addon</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -116,7 +116,7 @@
                 </goals>
                 <configuration>
                   <systemPropertyVariables>
-                    <native.image.path>/Users/mswiderski/Development/git-repos/community/automatik-platform-engine/archetypes/automatik-quarkus-archetype/target/automatik-quarkus-archetype-0.0.0-SNAPSHOT-runner</native.image.path>
+                    <native.image.path>/Users/mswiderski/Development/git-repos/community/automatiko-platform-engine/archetypes/automatiko-quarkus-archetype/target/automatiko-quarkus-archetype-0.0.0-SNAPSHOT-runner</native.image.path>
                     <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                     <maven.home>${maven.home}</maven.home>
                   </systemPropertyVariables>
