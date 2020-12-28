@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<semantic:definitions xmlns:semantic="https://www.omg.org/spec/DMN/20191111/MODEL/"  xmlns:triso="http://www.trisotech.com/2015/triso/modeling"  xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/"  xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/"  xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/"  xmlns:trisodmn="http://www.trisotech.com/2016/triso/dmn"  xmlns:feel="https://www.omg.org/spec/DMN/20191111/FEEL/"  xmlns:tc="http://www.omg.org/spec/DMN/20160719/testcase"  xmlns:drools="http://www.drools.org/kie/dmn/1.1"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:rss="http://purl.org/rss/2.0/"  xmlns:openapi="https://openapis.org/omg/extension/1.0"  xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns:boxedext="https://www.trisotech.com/spec/DMN/20191111/EXT/"   xmlns:i18n="http://www.omg.org/spec/BPMN/non-normative/extensions/i18n/1.0"  xmlns="http://www.trisotech.com/definitions/_a0076461-5ff2-49fe-a07e-96683f5b84b8" id="_a0076461-5ff2-49fe-a07e-96683f5b84b8" name="assign manager" namespace="http://www.trisotech.com/definitions/_a0076461-5ff2-49fe-a07e-96683f5b84b8" exporter="Decision Modeler" exporterVersion="7.2.4.202012171348" xml:lang="en" triso:translationLanguages="" triso:viewingLanguage="en" triso:logoChoice="Default">
+    <semantic:extensionElements/>
+    <semantic:itemDefinition name="tEmployee" label="tEmployee">
+        <semantic:itemComponent id="_44116ffd-0ffb-4031-a9f2-d0d951c1c2d6" name="firstName">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_749cf84f-b41e-43ed-8200-94d58ba1074f" name="lastName">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_72c217db-d42e-4d1f-aeca-218bdc77919a" name="email">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_6ff22b91-eaa8-4e0f-8ac0-1fac20146e65" name="startedAt">
+            <semantic:typeRef>date</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_70bbf4eb-c3a6-4932-8cb9-e0b961dea830" name="department">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+        <semantic:itemComponent id="_403300de-9205-4c46-9f8a-9f06dc4f85f9" name="manager">
+            <semantic:typeRef>string</semantic:typeRef>
+        </semantic:itemComponent>
+    </semantic:itemDefinition>
+    <semantic:decisionService id="_a0076461-5ff2-49fe-a07e-96683f5b84b8_DS" name="Whole Model Decision Service" triso:dynamicDecisionService="true" triso:wholeModelService="true">
+        <semantic:variable name="Whole Model Decision Service" id="_a0076461-5ff2-49fe-a07e-96683f5b84b8_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_a87ddd49-2e36-4c3a-a18f-62e5d005033b"/>
+        <semantic:inputData href="#_31ffa4bb-82af-47f9-aba8-d587a87f0f83"/>
+    </semantic:decisionService>
+    <semantic:decisionService id="_05461828-07d6-4bcd-ba06-e382af1217da_DS" name="Diagram assign employees manager" triso:dynamicDecisionService="true">
+        <semantic:variable name="Diagram assign employees manager" id="_05461828-07d6-4bcd-ba06-e382af1217da_DS_VAR" typeRef="Any"/>
+        <semantic:outputDecision href="#_a87ddd49-2e36-4c3a-a18f-62e5d005033b"/>
+        <semantic:inputData href="#_31ffa4bb-82af-47f9-aba8-d587a87f0f83"/>
+    </semantic:decisionService>
+    <semantic:inputData id="_31ffa4bb-82af-47f9-aba8-d587a87f0f83" name="employee">
+        <semantic:variable name="employee" id="_94d5543b-84d4-4566-977c-b1e40e7758b7" typeRef="tEmployee"/>
+    </semantic:inputData>
+    <semantic:decision id="_a87ddd49-2e36-4c3a-a18f-62e5d005033b" name="manager">
+        <semantic:variable name="manager" id="_7bf52dac-8fb2-4a95-b627-c4af43e008f6" typeRef="Any"/>
+        <semantic:informationRequirement id="_13850d39-3090-4c1d-a3d1-ff89693aab16">
+            <semantic:requiredInput href="#_31ffa4bb-82af-47f9-aba8-d587a87f0f83"/>
+        </semantic:informationRequirement>
+        <semantic:decisionTable triso:descriptionVisible="false" id="_62ad11da-ae3d-4446-8f08-a841b69a60a5" hitPolicy="UNIQUE" outputLabel="manager" typeRef="Any" triso:expressionId="_b10e3752-b71c-405e-8164-ba028a17835a">
+            <semantic:input id="_5a3e2a1e-2e0f-442c-9c67-7529ead9ffae" triso:allowNull="true" label="employee.department">
+                <semantic:inputExpression typeRef="string">
+                    <semantic:text>employee.department</semantic:text>
+                </semantic:inputExpression>
+            </semantic:input>
+            <semantic:output id="_66a9a023-d0a3-48d9-97ce-986956a95a81" triso:allowNull="true"/>
+            <semantic:annotation name="Description"/>
+            <semantic:rule id="_2d881c77-d134-4b1e-973d-fa071f55f66a">
+                <semantic:inputEntry id="_d30ab9a1-308f-49a3-89a5-7eb20af5f111">
+                    <semantic:text>"finance"</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_cc72c034-900f-4fc2-914f-7a44385c1be3">
+                    <semantic:text>"john@email.com"</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_9893af72-75bf-4a57-b59b-7506fe264c00">
+                <semantic:inputEntry id="_e2b4c5c4-4b2f-4a05-9e1f-47ea77c33b04">
+                    <semantic:text>"it"</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_bd583bd1-d02b-4135-84ed-8d9bef98eeae">
+                    <semantic:text>"mary@email.com"</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+            <semantic:rule id="_0bcf9c7f-0edc-465b-be3d-894f27fc4e4c">
+                <semantic:inputEntry id="_0fff9241-5004-4b17-bf17-b6a251b7dd5e">
+                    <semantic:text>"hr"</semantic:text>
+                </semantic:inputEntry>
+                <semantic:outputEntry id="_6db394c6-e1d6-4660-942a-8d6b213faf86">
+                    <semantic:text>"joe@email.com"</semantic:text>
+                </semantic:outputEntry>
+                <semantic:annotationEntry>
+                    <semantic:text/>
+                </semantic:annotationEntry>
+            </semantic:rule>
+        </semantic:decisionTable>
+    </semantic:decision>
+    <dmndi:DMNDI>
+        <dmndi:DMNDiagram id="_05461828-07d6-4bcd-ba06-e382af1217da" triso:modelElementRef="_252c0852-c1c9-4d71-80b9-37aa942ca728" name="assign employee's manager">
+            <di:extension/>
+            <dmndi:Size height="1050" width="1485"/>
+            <dmndi:DMNShape id="_27a60243-bbf5-4e36-8c46-88ef4baadf11" dmnElementRef="_31ffa4bb-82af-47f9-aba8-d587a87f0f83">
+                <dc:Bounds x="325.2588291168213" y="341" width="135.48234176635742" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_a0076461-5ff2-49fe-a07e-96683f5b84b8_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNShape id="_0f9d4c4d-086b-4b77-b24e-71fe646cb95f" dmnElementRef="_a87ddd49-2e36-4c3a-a18f-62e5d005033b">
+                <dc:Bounds x="316.5" y="179" width="153" height="60"/>
+                <dmndi:DMNLabel sharedStyle="LS_a0076461-5ff2-49fe-a07e-96683f5b84b8_0" trisodmn:defaultBounds="true"/>
+            </dmndi:DMNShape>
+            <dmndi:DMNEdge id="_4ce790ee-6029-4456-b672-f40feddc2a7d" dmnElementRef="_13850d39-3090-4c1d-a3d1-ff89693aab16" sourceElement="_27a60243-bbf5-4e36-8c46-88ef4baadf11" targetElement="_0f9d4c4d-086b-4b77-b24e-71fe646cb95f">
+                <di:waypoint x="392.9968013763428" y="341"/>
+                <di:waypoint x="393" y="239"/>
+                <dmndi:DMNLabel sharedStyle="LS_a0076461-5ff2-49fe-a07e-96683f5b84b8_0"/>
+            </dmndi:DMNEdge>
+        </dmndi:DMNDiagram>
+        <dmndi:DMNStyle id="LS_a0076461-5ff2-49fe-a07e-96683f5b84b8_0" fontFamily="arial,helvetica,sans-serif" fontSize="11" fontBold="false" fontItalic="false" fontUnderline="false" fontStrikeThrough="false"/>
+    </dmndi:DMNDI>
+</semantic:definitions>
