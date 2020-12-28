@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- origin at X=0.0 Y=0.0 -->
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:automatiko="https://automatiko.io" xmlns="https://automatiko.io" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:java="http://www.java.com/javaTypes" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd https://automatiko.io automatiko.xsd" id="Definition" exporter="org.eclipse.bpmn2.modeler.core" exporterVersion="2.0.0" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="https://automatiko.io" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="ItemDefinition_21" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.Employee"/>
+  <bpmn2:itemDefinition id="ItemDefinition_732" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.Vacation"/>
+  <bpmn2:itemDefinition id="ItemDefinition_923" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.Request"/>
+  <bpmn2:itemDefinition id="ItemDefinition_1084" isCollection="false" structureRef="java.util.List&lt;io.automatiko.examples.vacation.requests.Request&gt;"/>
+  <bpmn2:itemDefinition id="ItemDefinition_1403" isCollection="false" structureRef="java.lang.String"/>
+  <bpmn2:itemDefinition id="ItemDefinition_2666" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.service.NotificationService"/>
+  <bpmn2:itemDefinition id="ItemDefinition_240" isCollection="false" structureRef="java.lang.Integer"/>
+  <bpmn2:signal id="Signal_1" name="resigned"/>
+  <bpmn2:signal id="Signal_2" name="submit"/>
+  <bpmn2:interface id="Interface_1" implementationRef="io.automatiko.examples.vacation.requests.service.NotificationService" name="notificationService">
+    <bpmn2:operation id="Operation_1" name="notEnoughDaysNotification"/>
+  </bpmn2:interface>
+  <bpmn2:process id="vacations" automatiko:packageName="io.automatiko.examples.vacation.requests" name="Vacation tracking" isExecutable="true" processType="Public">
+    <bpmn2:documentation id="Documentation_1"><![CDATA[Vacation handling for individual employees. It's tracking complete history of vacation requests for given employee until his/her resignation.]]></bpmn2:documentation>
+    <bpmn2:extensionElements>
+      <automatiko:import name="io.automatiko.examples.vacation.requests.Employee"/>
+      <automatiko:import name="io.automatiko.examples.vacation.requests.Vacation"/>
+      <automatiko:import name="io.automatiko.examples.vacation.requests.Request"/>
+      <automatiko:import name="java.util.List"/>
+      <automatiko:metaData name="tags">
+        <automatiko:metaValue><![CDATA[#{employee.email},#{employee.manager},#{vacationUsed(vacation)}]]></automatiko:metaValue>
+      </automatiko:metaData>
+      <automatiko:metaData name="accessPolicy">
+        <automatiko:metaValue><![CDATA[participants]]></automatiko:metaValue>
+      </automatiko:metaData>
+      <automatiko:metaData name="securityRoles">
+        <automatiko:metaValue><![CDATA[employee,admin]]></automatiko:metaValue>
+      </automatiko:metaData>
+      <automatiko:import name="io.automatiko.examples.vacation.requests.service.NotificationService"/>
+    </bpmn2:extensionElements>
+    <bpmn2:startEvent id="StartEvent_1" name="new employee">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="elementname">
+          <automatiko:metaValue><![CDATA[new employee]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:dataObject id="employee" name="employee" itemSubjectRef="ItemDefinition_21">
+      <bpmn2:documentation id="Documentation_2"><![CDATA[Data object representing basic details of an employee that vacation requests can be submitted by]]></bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[required]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
+    <bpmn2:dataObject id="vacation" name="vacation" itemSubjectRef="ItemDefinition_732">
+      <bpmn2:documentation id="Documentation_4"><![CDATA[Represents current state of vacation for given employee - it holds total eligible days of vacation and used so far.]]></bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[output,auto-initialized]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
+    <bpmn2:dataObject id="request" name="request" itemSubjectRef="ItemDefinition_923">
+      <bpmn2:documentation id="Documentation_6"><![CDATA[Holds currently processing vacation requests]]></bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[internal]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
+    <bpmn2:dataObject id="vrequests" name="vrequests" itemSubjectRef="ItemDefinition_1084">
+      <bpmn2:documentation id="Documentation_9"><![CDATA[Collection of all submitted (regardless if they were approved, rejected or cancelled) vacation requests]]></bpmn2:documentation>
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[output,auto-initialized]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
+    <bpmn2:dataObject id="owner" name="owner" itemSubjectRef="ItemDefinition_1403">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[initiator,business-key,internal]]></automatiko:metaValue>
+        </automatiko:metaData>
+        <automatiko:metaData name="value">
+          <automatiko:metaValue><![CDATA[#{employee.email}]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" automatiko:priority="1" sourceRef="StartEvent_1" targetRef="BusinessRuleTask_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" automatiko:priority="1" sourceRef="BusinessRuleTask_1" targetRef="BusinessRuleTask_2"/>
+    <bpmn2:intermediateCatchEvent id="IntermediateCatchEvent_1" name="Employee resigned">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="elementname">
+          <automatiko:metaValue><![CDATA[Employee resigned]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+      <bpmn2:outputSet id="OutputSet_1" name="Output Set 1"/>
+      <bpmn2:signalEventDefinition id="SignalEventDefinition_1" signalRef="Signal_1"/>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" automatiko:priority="1" sourceRef="BusinessRuleTask_2" targetRef="IntermediateCatchEvent_1"/>
+    <bpmn2:endEvent id="EndEvent_1" name="Employee left company">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="elementname">
+          <automatiko:metaValue><![CDATA[Employee left company]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_1"/>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" automatiko:priority="1" sourceRef="IntermediateCatchEvent_1" targetRef="EndEvent_1"/>
+    <bpmn2:subProcess id="SubProcess_1" name="Submit vacation request" triggeredByEvent="true">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="elementname">
+          <automatiko:metaValue><![CDATA[Submit vacation request]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:startEvent id="StartEvent_2" name="new request" isInterrupting="false">
+        <bpmn2:extensionElements>
+          <automatiko:metaData name="elementname">
+            <automatiko:metaValue><![CDATA[new request]]></automatiko:metaValue>
+          </automatiko:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+        <bpmn2:dataOutput id="DataOutput_2" itemSubjectRef="ItemDefinition_923" name="Signal_2_Output"/>
+        <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
+          <bpmn2:sourceRef>DataOutput_2</bpmn2:sourceRef>
+          <bpmn2:targetRef>request</bpmn2:targetRef>
+        </bpmn2:dataOutputAssociation>
+        <bpmn2:outputSet id="OutputSet_2" name="Output Set 2">
+          <bpmn2:dataOutputRefs>DataOutput_2</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+        <bpmn2:signalEventDefinition id="SignalEventDefinition_2" signalRef="Signal_2"/>
+      </bpmn2:startEvent>
+      <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="Is eligible?" gatewayDirection="Diverging" default="SequenceFlow_9">
+        <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+        <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+      </bpmn2:exclusiveGateway>
+      <bpmn2:sequenceFlow id="SequenceFlow_5" automatiko:priority="1" sourceRef="StartEvent_2" targetRef="ExclusiveGateway_1"/>
+      <bpmn2:endEvent id="EndEvent_2" name="Not enough eligible vacation days">
+        <bpmn2:extensionElements>
+          <automatiko:metaData name="elementname">
+            <automatiko:metaValue><![CDATA[Not enough eligible vacation days]]></automatiko:metaValue>
+          </automatiko:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:callActivity id="CallActivity_1" automatiko:waitForCompletion="true" automatiko:independent="false" name="Process vacation request" calledElement="requests">
+        <bpmn2:extensionElements>
+          <automatiko:metaData name="elementname">
+            <automatiko:metaValue><![CDATA[Process vacation request]]></automatiko:metaValue>
+          </automatiko:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+        <bpmn2:ioSpecification id="InputOutputSpecification_2">
+          <bpmn2:dataInput id="DataInput_1" itemSubjectRef="ItemDefinition_21" name="employee"/>
+          <bpmn2:dataInput id="DataInput_2" itemSubjectRef="ItemDefinition_923" name="request"/>
+          <bpmn2:dataInput id="DataInput_3" itemSubjectRef="ItemDefinition_732" name="vacation"/>
+          <bpmn2:dataOutput id="DataOutput_3" itemSubjectRef="ItemDefinition_732" name="vacation"/>
+          <bpmn2:inputSet id="InputSet_2" name="Input Set 2">
+            <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs>
+            <bpmn2:dataInputRefs>DataInput_2</bpmn2:dataInputRefs>
+            <bpmn2:dataInputRefs>DataInput_3</bpmn2:dataInputRefs>
+          </bpmn2:inputSet>
+          <bpmn2:outputSet id="OutputSet_4" name="Output Set 4">
+            <bpmn2:dataOutputRefs>DataOutput_3</bpmn2:dataOutputRefs>
+          </bpmn2:outputSet>
+        </bpmn2:ioSpecification>
+        <bpmn2:dataInputAssociation id="DataInputAssociation_1">
+          <bpmn2:sourceRef>employee</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataInput_1</bpmn2:targetRef>
+        </bpmn2:dataInputAssociation>
+        <bpmn2:dataInputAssociation id="DataInputAssociation_2">
+          <bpmn2:sourceRef>request</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataInput_2</bpmn2:targetRef>
+        </bpmn2:dataInputAssociation>
+        <bpmn2:dataInputAssociation id="DataInputAssociation_3">
+          <bpmn2:sourceRef>vacation</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataInput_3</bpmn2:targetRef>
+        </bpmn2:dataInputAssociation>
+        <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
+          <bpmn2:sourceRef>DataOutput_3</bpmn2:sourceRef>
+          <bpmn2:targetRef>vacation</bpmn2:targetRef>
+        </bpmn2:dataOutputAssociation>
+      </bpmn2:callActivity>
+      <bpmn2:sequenceFlow id="SequenceFlow_7" automatiko:priority="1" sourceRef="ScriptTask_3" targetRef="CallActivity_1"/>
+      <bpmn2:endEvent id="EndEvent_3" name="Vacation request processed">
+        <bpmn2:extensionElements>
+          <automatiko:metaData name="elementname">
+            <automatiko:metaValue><![CDATA[Vacation request processed]]></automatiko:metaValue>
+          </automatiko:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+      </bpmn2:endEvent>
+      <bpmn2:sequenceFlow id="SequenceFlow_8" automatiko:priority="1" sourceRef="CallActivity_1" targetRef="EndEvent_3"/>
+      <bpmn2:scriptTask id="ScriptTask_3" name="Add request" scriptFormat="http://www.java.com/java">
+        <bpmn2:extensionElements>
+          <automatiko:metaData name="elementname">
+            <automatiko:metaValue><![CDATA[Add request]]></automatiko:metaValue>
+          </automatiko:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+        <bpmn2:script>vrequests.add(request);
+
+kcontext.setVariable(&quot;vrequests&quot;, vrequests);</bpmn2:script>
+      </bpmn2:scriptTask>
+      <bpmn2:sequenceFlow id="SequenceFlow_9" automatiko:priority="1" sourceRef="ExclusiveGateway_1" targetRef="ScriptTask_3"/>
+      <bpmn2:serviceTask id="ServiceTask_1" name="Notify not enough days" implementation="Java" operationRef="Operation_1">
+        <bpmn2:extensionElements>
+          <automatiko:metaData name="elementname">
+            <automatiko:metaValue><![CDATA[Notify not enough days]]></automatiko:metaValue>
+          </automatiko:metaData>
+        </bpmn2:extensionElements>
+        <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+        <bpmn2:outgoing>SequenceFlow_11</bpmn2:outgoing>
+        <bpmn2:ioSpecification id="InputOutputSpecification_6">
+          <bpmn2:dataInput id="DataInput_4" itemSubjectRef="ItemDefinition_21" name="employee"/>
+          <bpmn2:dataInput id="DataInput_5" itemSubjectRef="ItemDefinition_923" name="request"/>
+          <bpmn2:inputSet id="InputSet_6" name="Input Set 6">
+            <bpmn2:dataInputRefs>DataInput_4</bpmn2:dataInputRefs>
+            <bpmn2:dataInputRefs>DataInput_5</bpmn2:dataInputRefs>
+          </bpmn2:inputSet>
+          <bpmn2:outputSet id="OutputSet_8" name="Output Set 8"/>
+        </bpmn2:ioSpecification>
+        <bpmn2:dataInputAssociation id="DataInputAssociation_4">
+          <bpmn2:sourceRef>employee</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataInput_4</bpmn2:targetRef>
+        </bpmn2:dataInputAssociation>
+        <bpmn2:dataInputAssociation id="DataInputAssociation_5">
+          <bpmn2:sourceRef>request</bpmn2:sourceRef>
+          <bpmn2:targetRef>DataInput_5</bpmn2:targetRef>
+        </bpmn2:dataInputAssociation>
+      </bpmn2:serviceTask>
+      <bpmn2:sequenceFlow id="SequenceFlow_10" automatiko:priority="1" sourceRef="ExclusiveGateway_1" targetRef="ServiceTask_1">
+        <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2" language="http://www.java.com/java">isNotEligible(request, vacation)</bpmn2:conditionExpression>
+      </bpmn2:sequenceFlow>
+      <bpmn2:sequenceFlow id="SequenceFlow_11" automatiko:priority="1" sourceRef="ServiceTask_1" targetRef="EndEvent_2"/>
+    </bpmn2:subProcess>
+    <bpmn2:businessRuleTask id="BusinessRuleTask_1" name="Calculate vacation" implementation="http://www.jboss.org/drools/dmn">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="elementname">
+          <automatiko:metaValue><![CDATA[Calculate vacation]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_1">
+        <bpmn2:dataInput id="DataInput_6" name="namespace"/>
+        <bpmn2:dataInput id="DataInput_7" name="model"/>
+        <bpmn2:dataInput id="DataInput_8" name="decision"/>
+        <bpmn2:dataInput id="DataInput_9" itemSubjectRef="ItemDefinition_21" name="employee"/>
+        <bpmn2:dataOutput id="DataOutput_1" itemSubjectRef="ItemDefinition_240" name="vacationDays"/>
+        <bpmn2:inputSet id="_InputSet_4">
+          <bpmn2:dataInputRefs>DataInput_6</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_7</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_8</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_9</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_3" name="Output Set">
+          <bpmn2:dataOutputRefs>DataOutput_1</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_6">
+        <bpmn2:targetRef>DataInput_6</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_1">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_1">http://www.trisotech.com/definitions/_a0076461-5ff2-49fe-a07e-96683f5b84b8</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_3">DataInput_6</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_7">
+        <bpmn2:targetRef>DataInput_7</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_2">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_4">assign vacation</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_5">DataInput_7</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_8">
+        <bpmn2:targetRef>DataInput_8</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_9">
+        <bpmn2:sourceRef>employee</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_9</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
+        <bpmn2:sourceRef>DataOutput_1</bpmn2:sourceRef>
+        <bpmn2:assignment id="Assignment_4">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_8">DataOutput_1</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_10">#{vacation.eligible}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:businessRuleTask>
+    <bpmn2:businessRuleTask id="BusinessRuleTask_2" name="Assign manager" implementation="http://www.jboss.org/drools/dmn">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="elementname">
+          <automatiko:metaValue><![CDATA[Assign manager]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_3">
+        <bpmn2:dataInput id="DataInput_10" name="namespace"/>
+        <bpmn2:dataInput id="DataInput_11" name="model"/>
+        <bpmn2:dataInput id="DataInput_12" name="decision"/>
+        <bpmn2:dataInput id="DataInput_13" itemSubjectRef="ItemDefinition_21" name="employee"/>
+        <bpmn2:dataOutput id="DataOutput_4" itemSubjectRef="ItemDefinition_1403" name="manager"/>
+        <bpmn2:inputSet id="_InputSet_5">
+          <bpmn2:dataInputRefs>DataInput_10</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_11</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_12</bpmn2:dataInputRefs>
+          <bpmn2:dataInputRefs>DataInput_13</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_5" name="Output Set">
+          <bpmn2:dataOutputRefs>DataOutput_4</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_10">
+        <bpmn2:targetRef>DataInput_10</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_5">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">http://www.trisotech.com/definitions/_a0076461-5ff2-49fe-a07e-96683f5b84b8</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_12">DataInput_10</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_11">
+        <bpmn2:targetRef>DataInput_11</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_6">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_13">assign manager</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_14">DataInput_11</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_12">
+        <bpmn2:targetRef>DataInput_12</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_13">
+        <bpmn2:sourceRef>employee</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_13</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_4">
+        <bpmn2:sourceRef>DataOutput_4</bpmn2:sourceRef>
+        <bpmn2:assignment id="Assignment_8">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_17">DataOutput_4</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_19">#{employee.manager}</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:businessRuleTask>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="vacations">
+      <bpmndi:BPMNShape id="BPMNShape_SubProcess_1" bpmnElement="SubProcess_1" isExpanded="true">
+        <dc:Bounds height="301.0" width="701.0" x="83.0" y="360.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_1">
+          <dc:Bounds height="11.0" width="97.0" x="89.0" y="363.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="110.0" y="231.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_2" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="11.0" width="59.0" x="99.0" y="267.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_DataObject_1" bpmnElement="employee">
+        <dc:Bounds height="50.0" width="36.0" x="100.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_3">
+          <dc:Bounds height="11.0" width="40.0" x="98.0" y="120.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_DataObject_2" bpmnElement="vacation">
+        <dc:Bounds height="50.0" width="36.0" x="188.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_4">
+          <dc:Bounds height="11.0" width="34.0" x="189.0" y="120.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_DataObject_3" bpmnElement="request">
+        <dc:Bounds height="50.0" width="36.0" x="270.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_5">
+          <dc:Bounds height="11.0" width="31.0" x="272.0" y="120.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_DataObject_4" bpmnElement="vrequests">
+        <dc:Bounds height="50.0" width="36.0" x="360.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_6">
+          <dc:Bounds height="11.0" width="40.0" x="358.0" y="120.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_DataObject_5" bpmnElement="owner">
+        <dc:Bounds height="50.0" width="36.0" x="800.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_7">
+          <dc:Bounds height="11.0" width="25.0" x="805.0" y="120.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_IntermediateCatchEvent_1" bpmnElement="IntermediateCatchEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="644.0" y="231.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_10">
+          <dc:Bounds height="11.0" width="78.0" x="623.0" y="267.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="748.0" y="231.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_11" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="22.0" width="61.0" x="736.0" y="267.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_2" bpmnElement="StartEvent_2">
+        <dc:Bounds height="36.0" width="36.0" x="115.0" y="422.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_12" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="11.0" width="50.0" x="108.0" y="458.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="226.0" y="415.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_13">
+          <dc:Bounds height="11.0" width="43.0" x="229.0" y="465.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_2" bpmnElement="EndEvent_2">
+        <dc:Bounds height="36.0" width="36.0" x="470.0" y="422.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_14" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="33.0" width="69.0" x="454.0" y="458.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_CallActivity_1" bpmnElement="CallActivity_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="420.0" y="549.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_15">
+          <dc:Bounds height="11.0" width="102.0" x="424.0" y="568.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_3" bpmnElement="EndEvent_3">
+        <dc:Bounds height="36.0" width="36.0" x="640.0" y="556.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_16" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="22.0" width="73.0" x="622.0" y="592.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_3" bpmnElement="ScriptTask_3" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="251.0" y="556.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_17">
+          <dc:Bounds height="11.0" width="49.0" x="281.0" y="575.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ServiceTask_1" bpmnElement="ServiceTask_1" isExpanded="true">
+        <dc:Bounds height="50.0" width="110.0" x="306.0" y="414.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_18">
+          <dc:Bounds height="11.0" width="93.0" x="314.0" y="433.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_BusinessRuleTask_1" bpmnElement="BusinessRuleTask_1">
+        <dc:Bounds height="50.0" width="110.0" x="249.0" y="224.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_8" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="11.0" width="74.0" x="267.0" y="243.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_BusinessRuleTask_2" bpmnElement="BusinessRuleTask_2">
+        <dc:Bounds height="50.0" width="110.0" x="466.0" y="224.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_9" labelStyle="BPMNLabelStyle_1">
+          <dc:Bounds height="11.0" width="66.0" x="488.0" y="243.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_BusinessRuleTask_1">
+        <di:waypoint xsi:type="dc:Point" x="146.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="197.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="249.0" y="249.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_19"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_BusinessRuleTask_1" targetElement="BPMNShape_BusinessRuleTask_2">
+        <di:waypoint xsi:type="dc:Point" x="359.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="412.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="466.0" y="249.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_20"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_BusinessRuleTask_2" targetElement="BPMNShape_IntermediateCatchEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="576.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="610.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="644.0" y="249.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_21"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_IntermediateCatchEvent_1" targetElement="BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="680.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="714.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="748.0" y="249.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_22"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_1" bpmnElement="DataOutputAssociation_2" sourceElement="BPMNShape_StartEvent_2" targetElement="BPMNShape_DataObject_3">
+        <di:waypoint xsi:type="dc:Point" x="115.0" y="440.0"/>
+        <di:waypoint xsi:type="dc:Point" x="105.0" y="440.0"/>
+        <di:waypoint xsi:type="dc:Point" x="105.0" y="200.0"/>
+        <di:waypoint xsi:type="dc:Point" x="288.0" y="200.0"/>
+        <di:waypoint xsi:type="dc:Point" x="288.0" y="120.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_23"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_StartEvent_2" targetElement="BPMNShape_ExclusiveGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="151.0" y="440.0"/>
+        <di:waypoint xsi:type="dc:Point" x="188.0" y="440.0"/>
+        <di:waypoint xsi:type="dc:Point" x="226.0" y="440.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_24"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="SequenceFlow_7" sourceElement="BPMNShape_ScriptTask_3" targetElement="BPMNShape_CallActivity_1">
+        <di:waypoint xsi:type="dc:Point" x="361.0" y="581.0"/>
+        <di:waypoint xsi:type="dc:Point" x="390.0" y="581.0"/>
+        <di:waypoint xsi:type="dc:Point" x="420.0" y="582.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_25"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_CallActivity_1" targetElement="BPMNShape_EndEvent_3">
+        <di:waypoint xsi:type="dc:Point" x="530.0" y="574.0"/>
+        <di:waypoint xsi:type="dc:Point" x="585.0" y="574.0"/>
+        <di:waypoint xsi:type="dc:Point" x="640.0" y="574.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_26"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_1" bpmnElement="DataInputAssociation_1" sourceElement="BPMNShape_DataObject_1" targetElement="BPMNShape_CallActivity_1">
+        <di:waypoint xsi:type="dc:Point" x="100.0" y="95.0"/>
+        <di:waypoint xsi:type="dc:Point" x="90.0" y="95.0"/>
+        <di:waypoint xsi:type="dc:Point" x="90.0" y="609.0"/>
+        <di:waypoint xsi:type="dc:Point" x="475.0" y="609.0"/>
+        <di:waypoint xsi:type="dc:Point" x="475.0" y="599.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_27"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_2" bpmnElement="DataInputAssociation_2" sourceElement="BPMNShape_DataObject_3" targetElement="BPMNShape_CallActivity_1">
+        <di:waypoint xsi:type="dc:Point" x="294.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="294.0" y="214.0"/>
+        <di:waypoint xsi:type="dc:Point" x="216.0" y="214.0"/>
+        <di:waypoint xsi:type="dc:Point" x="216.0" y="586.0"/>
+        <di:waypoint xsi:type="dc:Point" x="420.0" y="586.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_28"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_3" bpmnElement="DataInputAssociation_3" sourceElement="BPMNShape_DataObject_2" targetElement="BPMNShape_CallActivity_1">
+        <di:waypoint xsi:type="dc:Point" x="206.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="206.0" y="60.0"/>
+        <di:waypoint xsi:type="dc:Point" x="456.0" y="60.0"/>
+        <di:waypoint xsi:type="dc:Point" x="456.0" y="549.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_29"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_2" bpmnElement="DataOutputAssociation_3" sourceElement="BPMNShape_CallActivity_1" targetElement="BPMNShape_DataObject_2">
+        <di:waypoint xsi:type="dc:Point" x="530.0" y="565.0"/>
+        <di:waypoint xsi:type="dc:Point" x="540.0" y="565.0"/>
+        <di:waypoint xsi:type="dc:Point" x="540.0" y="284.0"/>
+        <di:waypoint xsi:type="dc:Point" x="586.0" y="284.0"/>
+        <di:waypoint xsi:type="dc:Point" x="586.0" y="60.0"/>
+        <di:waypoint xsi:type="dc:Point" x="212.0" y="60.0"/>
+        <di:waypoint xsi:type="dc:Point" x="212.0" y="70.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_30"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="SequenceFlow_9" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ScriptTask_3">
+        <di:waypoint xsi:type="dc:Point" x="251.0" y="465.0"/>
+        <di:waypoint xsi:type="dc:Point" x="251.0" y="510.0"/>
+        <di:waypoint xsi:type="dc:Point" x="306.0" y="510.0"/>
+        <di:waypoint xsi:type="dc:Point" x="306.0" y="556.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_31"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="SequenceFlow_10" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_ServiceTask_1">
+        <di:waypoint xsi:type="dc:Point" x="276.0" y="440.0"/>
+        <di:waypoint xsi:type="dc:Point" x="291.0" y="439.0"/>
+        <di:waypoint xsi:type="dc:Point" x="306.0" y="439.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_32"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_4" bpmnElement="DataInputAssociation_4" sourceElement="BPMNShape_DataObject_1" targetElement="BPMNShape_ServiceTask_1">
+        <di:waypoint xsi:type="dc:Point" x="100.0" y="86.0"/>
+        <di:waypoint xsi:type="dc:Point" x="90.0" y="86.0"/>
+        <di:waypoint xsi:type="dc:Point" x="90.0" y="412.0"/>
+        <di:waypoint xsi:type="dc:Point" x="280.0" y="412.0"/>
+        <di:waypoint xsi:type="dc:Point" x="280.0" y="430.0"/>
+        <di:waypoint xsi:type="dc:Point" x="306.0" y="430.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_33"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_5" bpmnElement="DataInputAssociation_5" sourceElement="BPMNShape_DataObject_3" targetElement="BPMNShape_ServiceTask_1">
+        <di:waypoint xsi:type="dc:Point" x="306.0" y="95.0"/>
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="95.0"/>
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="214.0"/>
+        <di:waypoint xsi:type="dc:Point" x="426.0" y="214.0"/>
+        <di:waypoint xsi:type="dc:Point" x="426.0" y="430.0"/>
+        <di:waypoint xsi:type="dc:Point" x="416.0" y="430.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_34"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_11" bpmnElement="SequenceFlow_11" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_EndEvent_2">
+        <di:waypoint xsi:type="dc:Point" x="416.0" y="447.0"/>
+        <di:waypoint xsi:type="dc:Point" x="443.0" y="447.0"/>
+        <di:waypoint xsi:type="dc:Point" x="443.0" y="440.0"/>
+        <di:waypoint xsi:type="dc:Point" x="470.0" y="440.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_35"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_6" bpmnElement="DataInputAssociation_9" sourceElement="BPMNShape_DataObject_1" targetElement="BPMNShape_BusinessRuleTask_1">
+        <di:waypoint xsi:type="dc:Point" x="118.0" y="120.0"/>
+        <di:waypoint xsi:type="dc:Point" x="118.0" y="172.0"/>
+        <di:waypoint xsi:type="dc:Point" x="304.0" y="172.0"/>
+        <di:waypoint xsi:type="dc:Point" x="304.0" y="224.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_36"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_7" bpmnElement="DataInputAssociation_13" sourceElement="BPMNShape_DataObject_1" targetElement="BPMNShape_BusinessRuleTask_2">
+        <di:waypoint xsi:type="dc:Point" x="118.0" y="70.0"/>
+        <di:waypoint xsi:type="dc:Point" x="118.0" y="60.0"/>
+        <di:waypoint xsi:type="dc:Point" x="521.0" y="60.0"/>
+        <di:waypoint xsi:type="dc:Point" x="521.0" y="224.0"/>
+        <bpmndi:BPMNLabel id="BPMNLabel_37"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+    <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">
+      <dc:Font name="arial" size="9.0"/>
+    </bpmndi:BPMNLabelStyle>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
