@@ -9,7 +9,7 @@ easily tried as container to avoid any up front configuration on the environment
 Order management is implementing `Event Stream` use case backed by Apache Kafka.
 
 Complete example description and instructions can be
-found [Orders example](event-streams-order).
+found [Orders example](event-streams-orders).
 
 
 ## Water leak detection
