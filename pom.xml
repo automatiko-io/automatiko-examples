@@ -26,5 +26,6 @@
     <module>event-streams-orders</module>
     <module>event-streams-sensors</module>
     <module>vacation-requests</module>
+    <module>weather-conditions</module>
   </modules>
 </project>

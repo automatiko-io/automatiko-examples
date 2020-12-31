@@ -44,7 +44,7 @@ policy. This means that given instance will be visible to the owner of it
 manager who has at least one approval task awaiting.
 
 TIP: Note that there is simple UI for manager to see incoming approval tasks.
-Just open browser at link:http://localhost:8080[] and connect using `john@email.com`
+Just open browser at `http://localhost:8080` and connect using `john@email.com`
 
 
 

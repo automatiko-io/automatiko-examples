@@ -25,3 +25,10 @@ Vacation requests is implementing `Human Centric` use case backed by database.
 
 Complete example description and instructions can be
 found [Vacation requests example](vacation-requests).
+
+## Weather conditions
+
+Weather conditions is implementing `Service Orchestration` use case.
+
+Complete example description and instructions can be
+found [Weather conditions example](weather-conditions).
