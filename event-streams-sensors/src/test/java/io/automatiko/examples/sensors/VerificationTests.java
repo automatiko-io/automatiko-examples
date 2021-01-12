@@ -163,8 +163,8 @@ public class VerificationTests {
         
         InMemorySource<MqttMessage<byte[]>> channelH = connector.source("humidity");
         execCounter.reset(2);
-        channelW.send(MqttMessage.of("building/B123/kitchen/water", water.getBytes()));
-        channelH.send(MqttMessage.of("building/B123/kitchen/humidity", humidity.getBytes()));
+        channelW.send(MqttMessage.of("building/A000/kitchen/water", water.getBytes()));
+        channelH.send(MqttMessage.of("building/A000/kitchen/humidity", humidity.getBytes()));
         execCounter.waitTillCompletion(5);
         
         given()
@@ -177,9 +177,9 @@ public class VerificationTests {
         Map data = given()
             .accept(ContentType.JSON)
         .when()
-            .get("/waterleaks/B123-kitchen")
+            .get("/waterleaks/A000-kitchen")
         .then()
-            .statusCode(200).body("id", is("B123-kitchen")).extract().as(Map.class);
+            .statusCode(200).body("id", is("A000-kitchen")).extract().as(Map.class);
         
         List<?> waterBucket = (List<?>) data.get("measurements");
         Object humidityValue = data.get("humidity");
@@ -193,7 +193,7 @@ public class VerificationTests {
         List<Map<String, String>> taskInfo = given()
                 .accept(ContentType.JSON)
             .when()
-                .get("/waterleaks/B123-kitchen/tasks?group=technicians")
+                .get("/waterleaks/A000-kitchen/tasks?group=technicians")
             .then()
                 .statusCode(200)
                 .extract().as(List.class);
@@ -210,15 +210,15 @@ public class VerificationTests {
             .accept(ContentType.JSON)
             .body("{}")
         .when()
-            .post("/waterleaks/B123-kitchen/" + taskName + "/" + taskId + "?group=technicians")
+            .post("/waterleaks/A000-kitchen/" + taskName + "/" + taskId + "?group=technicians")
         .then()
-            .statusCode(200).body("id", is("B123-kitchen"));
+            .statusCode(200).body("id", is("A000-kitchen"));
         
         // abort instance for kitchen
         given()
             .accept(ContentType.JSON)
         .when()
-            .delete("/waterleaks/B123-kitchen")
+            .delete("/waterleaks/A000-kitchen")
         .then()
             .statusCode(200);
         
@@ -241,8 +241,8 @@ public class VerificationTests {
         
         InMemorySource<MqttMessage<byte[]>> channelH = connector.source("humidity");
         execCounter.reset(2);
-        channelW.send(MqttMessage.of("building/B123/kitchen/water", water.getBytes()));
-        channelH.send(MqttMessage.of("building/B123/kitchen/humidity", humidity.getBytes()));
+        channelW.send(MqttMessage.of("building/C555/kitchen/water", water.getBytes()));
+        channelH.send(MqttMessage.of("building/C555/kitchen/humidity", humidity.getBytes()));
         execCounter.waitTillCompletion(5);
         
         InMemorySink<MqttMessage<byte[]>> channelReports = connector.sink("reports");
@@ -257,9 +257,9 @@ public class VerificationTests {
         Map data = given()
             .accept(ContentType.JSON)
         .when()
-            .get("/waterleaks/B123-kitchen")
+            .get("/waterleaks/C555-kitchen")
         .then()
-            .statusCode(200).body("id", is("B123-kitchen")).extract().as(Map.class);
+            .statusCode(200).body("id", is("C555-kitchen")).extract().as(Map.class);
         
         List<?> waterBucket = (List<?>) data.get("measurements");
         Object humidityValue = data.get("humidity");
@@ -271,7 +271,7 @@ public class VerificationTests {
         List<Map<String, String>> taskInfo = given()
                 .accept(ContentType.JSON)
             .when()
-                .get("/waterleaks/B123-kitchen/tasks?group=technicians")
+                .get("/waterleaks/C555-kitchen/tasks?group=technicians")
             .then()
                 .statusCode(200)
                 .extract().as(List.class);
@@ -313,7 +313,7 @@ public class VerificationTests {
         
         InMemorySource<MqttMessage<byte[]>> channelR = connector.source("buildingreports");
         execCounter.reset(1);
-        channelR.send(MqttMessage.of("reports/B123/kitchen/hourly", report.getBytes()));
+        channelR.send(MqttMessage.of("reports/D432/kitchen/hourly", report.getBytes()));
         execCounter.waitTillCompletion(5);
         
         given()
@@ -326,9 +326,9 @@ public class VerificationTests {
         Map data = given()
             .accept(ContentType.JSON)
         .when()
-            .get("/reports/B123")
+            .get("/reports/D432")
         .then()            
-            .statusCode(200).body("id", is("B123")).extract().as(Map.class);
+            .statusCode(200).body("id", is("D432")).extract().as(Map.class);
         
         List<?> waterBucket = (List<?>) data.get("waterReports");       
         
@@ -336,7 +336,7 @@ public class VerificationTests {
         // let's push data for living room
         report = "{\"average\":45.0,\"min\":25.0,\"max\":65.0,\"leakDetected\":false}";
         execCounter.reset(1);
-        channelR.send(MqttMessage.of("reports/B123/livingroom/hourly", report.getBytes()));
+        channelR.send(MqttMessage.of("reports/D432/livingroom/hourly", report.getBytes()));
         execCounter.waitTillCompletion(5);
         
         given()
@@ -349,9 +349,9 @@ public class VerificationTests {
         data = given()
             .accept(ContentType.JSON)
         .when()
-            .get("/reports/B123")
+            .get("/reports/D432")
         .then()
-            .statusCode(200).body("id", is("B123")).extract().as(Map.class);
+            .statusCode(200).body("id", is("D432")).extract().as(Map.class);
         
         waterBucket = (List<?>) data.get("waterReports");
         
@@ -361,7 +361,7 @@ public class VerificationTests {
         given()
             .accept(ContentType.JSON)
         .when()
-            .delete("/reports/B123")
+            .delete("/reports/D432")
         .then()
             .statusCode(200);
         
