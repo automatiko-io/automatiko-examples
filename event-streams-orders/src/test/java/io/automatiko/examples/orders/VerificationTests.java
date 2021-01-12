@@ -13,11 +13,15 @@ import java.util.Comparator;
 import java.util.Map;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
+import io.automatiko.engine.api.event.EventPublisher;
+import io.automatiko.engine.services.event.impl.CountDownProcessInstanceEventPublisher;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.smallrye.reactive.messaging.connectors.InMemoryConnector;
@@ -31,6 +35,14 @@ public class VerificationTests {
     @Inject 
     @Any
     InMemoryConnector connector;
+    
+    private CountDownProcessInstanceEventPublisher execCounter = new CountDownProcessInstanceEventPublisher();
+    
+    @Produces
+    @Singleton
+    public EventPublisher publisher() {
+        return execCounter;
+    }
     
     @AfterAll
     public static void preapre() throws IOException {
@@ -74,8 +86,9 @@ public class VerificationTests {
         InMemorySource<KafkaRecord<String, String>> channelOrders = connector.source("orders");          
         
         String id = "ORDER-1";
-        
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
+        execCounter.waitTillCompletion(5);
          
         given()
             .accept(ContentType.JSON)
@@ -105,7 +118,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
-        channelOrders.send(KafkaRecord.of(id, item));       
+        execCounter.reset(1);
+        channelOrders.send(KafkaRecord.of(id, item));
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -136,7 +151,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, placedOrder));
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -166,7 +183,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, shippedOrder));
+        execCounter.waitTillCompletion(5);
 
         given()
             .accept(ContentType.JSON)
@@ -204,7 +223,9 @@ public class VerificationTests {
         
         String id = "ORDER-1";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
+        execCounter.waitTillCompletion(5);
          
         given()
             .accept(ContentType.JSON)
@@ -234,7 +255,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
-        channelOrders.send(KafkaRecord.of(id, item));       
+        execCounter.reset(1);
+        channelOrders.send(KafkaRecord.of(id, item));
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -265,7 +288,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, placedOrder));
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -295,7 +320,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, cancelledOrder));
+        execCounter.waitTillCompletion(5);
 
         given()
             .accept(ContentType.JSON)
@@ -333,7 +360,9 @@ public class VerificationTests {
         
         String id = "ORDER-1";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
+        execCounter.waitTillCompletion(5);
          
         given()
             .accept(ContentType.JSON)
@@ -374,7 +403,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, cancelledOrder));
+        execCounter.waitTillCompletion(5);
 
         given()
             .accept(ContentType.JSON)
@@ -413,7 +444,9 @@ public class VerificationTests {
         
         String id = "ORDER-1";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
+        execCounter.waitTillCompletion(5);
          
         given()
             .accept(ContentType.JSON)
@@ -453,7 +486,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
-        channelOrders.send(KafkaRecord.of(id, item));       
+        execCounter.reset(1);
+        channelOrders.send(KafkaRecord.of(id, item));  
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -484,7 +519,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, placedOrder));
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -517,7 +554,9 @@ public class VerificationTests {
                 + "    }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelCustomers.send(KafkaRecord.of(id, customerPayload));
+        execCounter.waitTillCompletion(5);
         
         data = getOrderData(id);
         order = data.get("order");             
@@ -557,7 +596,9 @@ public class VerificationTests {
                 + "  }\n"
                 + "}";
         
+        execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, shippedOrder));
+        execCounter.waitTillCompletion(5);
 
         given()
             .accept(ContentType.JSON)

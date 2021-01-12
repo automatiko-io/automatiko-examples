@@ -14,12 +14,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
+import io.automatiko.engine.api.event.EventPublisher;
+import io.automatiko.engine.services.event.impl.CountDownProcessInstanceEventPublisher;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 import io.smallrye.reactive.messaging.connectors.InMemoryConnector;
@@ -34,6 +38,14 @@ public class VerificationTests {
     @Inject 
     @Any
     InMemoryConnector connector;
+    
+    private CountDownProcessInstanceEventPublisher execCounter = new CountDownProcessInstanceEventPublisher();
+        
+    @Produces
+    @Singleton
+    public EventPublisher publisher() {
+        return execCounter;
+    }
     
     @AfterAll
     public static void preapre() throws IOException {
@@ -51,9 +63,10 @@ public class VerificationTests {
         .map(Path::toFile)
         .forEach(File::delete);
     }
+
     
     @Test
-    public void testProcessExecution() {
+    public void testProcessExecution() throws InterruptedException {
         String humidity = "{\"ts\":1, \"val\" : 45.0}";
         String water = "{\"ts\":1, \"val\" : 29.0}";
         
@@ -61,8 +74,11 @@ public class VerificationTests {
         
         InMemorySource<MqttMessage<byte[]>> channelH = connector.source("humidity");
         
+        execCounter.reset(2);
         channelW.send(MqttMessage.of("building/B123/kitchen/water", water.getBytes()));
         channelH.send(MqttMessage.of("building/B123/kitchen/humidity", humidity.getBytes()));
+        
+        execCounter.waitTillCompletion(5);
         
         given()
             .accept(ContentType.JSON)
@@ -88,8 +104,10 @@ public class VerificationTests {
         humidity = "{\"ts\":1, \"val\" : 45.0}";
         water = "{\"ts\":1, \"val\" : 29.0}";
         
+        execCounter.reset(2);
         channelW.send(MqttMessage.of("building/B123/livingroom/temperature", water.getBytes()));
         channelH.send(MqttMessage.of("building/B123/livingroom/humidity", humidity.getBytes()));
+        execCounter.waitTillCompletion(5);
         
         given()
             .accept(ContentType.JSON)
@@ -136,7 +154,7 @@ public class VerificationTests {
     }
     
     @Test
-    public void testProcessExecutionHumidityHigh() {
+    public void testProcessExecutionHumidityHigh() throws InterruptedException {
 
         String humidity = "{\"ts\":1, \"val\" : 95.0}";
         String water = "{\"ts\":1, \"val\" : 29.0}";
@@ -144,9 +162,10 @@ public class VerificationTests {
         InMemorySource<MqttMessage<byte[]>> channelW = connector.source("water");
         
         InMemorySource<MqttMessage<byte[]>> channelH = connector.source("humidity");
-        
+        execCounter.reset(2);
         channelW.send(MqttMessage.of("building/B123/kitchen/water", water.getBytes()));
         channelH.send(MqttMessage.of("building/B123/kitchen/humidity", humidity.getBytes()));
+        execCounter.waitTillCompletion(5);
         
         given()
             .accept(ContentType.JSON)
@@ -211,6 +230,7 @@ public class VerificationTests {
             .body("$.size()", is(0));
     }
     
+    
     @Test
     public void testProcessExecutionReportSent() throws InterruptedException {
         System.setProperty("water_leaks_timer", "PT2S");
@@ -220,9 +240,10 @@ public class VerificationTests {
         InMemorySource<MqttMessage<byte[]>> channelW = connector.source("water");
         
         InMemorySource<MqttMessage<byte[]>> channelH = connector.source("humidity");
-        
+        execCounter.reset(2);
         channelW.send(MqttMessage.of("building/B123/kitchen/water", water.getBytes()));
         channelH.send(MqttMessage.of("building/B123/kitchen/humidity", humidity.getBytes()));
+        execCounter.waitTillCompletion(5);
         
         InMemorySink<MqttMessage<byte[]>> channelReports = connector.sink("reports");
         
@@ -281,25 +302,19 @@ public class VerificationTests {
         .then().statusCode(200)
             .body("$.size()", is(0));
         
-        given()
-            .accept(ContentType.JSON)
-        .when()
-            .get("/waterleaks")
-        .then().statusCode(200)
-            .body("$.size()", is(0));
-        
         List<? extends Message<MqttMessage<byte[]>>> received = channelReports.received();
         assertEquals(1, received.size());
         channelReports.clear();
     }
     
     @Test
-    public void testBuildingReportsProcessExecution() {
+    public void testBuildingReportsProcessExecution() throws InterruptedException {
         String report = "{\"average\":25.0,\"min\":25.0,\"max\":25.0,\"leakDetected\":false}";
         
         InMemorySource<MqttMessage<byte[]>> channelR = connector.source("buildingreports");
-                
+        execCounter.reset(1);
         channelR.send(MqttMessage.of("reports/B123/kitchen/hourly", report.getBytes()));
+        execCounter.waitTillCompletion(5);
         
         given()
             .accept(ContentType.JSON)
@@ -320,8 +335,9 @@ public class VerificationTests {
         assertEquals(1, waterBucket.size());        
         // let's push data for living room
         report = "{\"average\":45.0,\"min\":25.0,\"max\":65.0,\"leakDetected\":false}";
-        
+        execCounter.reset(1);
         channelR.send(MqttMessage.of("reports/B123/livingroom/hourly", report.getBytes()));
+        execCounter.waitTillCompletion(5);
         
         given()
             .accept(ContentType.JSON)
