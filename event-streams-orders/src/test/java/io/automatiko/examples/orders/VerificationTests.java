@@ -214,14 +214,14 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-2\",\n"
                 + "    \"status\": \"Created\"\n"
                 + "  }\n"
                 + "}";
         
         InMemorySource<KafkaRecord<String, String>> channelOrders = connector.source("orders");          
         
-        String id = "ORDER-1";
+        String id = "ORDER-2";
         
         execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
@@ -239,7 +239,7 @@ public class VerificationTests {
         Object order = data.get("order");             
         assertNotNull(order);
         Map<String, Object> orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-2", orderAsMap.get("orderNumber"));
         assertEquals("Created", orderAsMap.get("status"));
         assertEquals(0.0, orderAsMap.get("amount"));
         
@@ -263,7 +263,7 @@ public class VerificationTests {
         order = data.get("order");             
         assertNotNull(order);
         orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-2", orderAsMap.get("orderNumber"));
         assertEquals("Created", orderAsMap.get("status"));
         assertEquals(0.0, orderAsMap.get("amount"));
         
@@ -283,7 +283,7 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-2\",\n"
                 + "    \"status\": \"Placed\"\n"
                 + "  }\n"
                 + "}";
@@ -296,7 +296,7 @@ public class VerificationTests {
         order = data.get("order");             
         assertNotNull(order);
         orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-2", orderAsMap.get("orderNumber"));
         assertEquals("Placed", orderAsMap.get("status"));
         assertEquals(36.0, orderAsMap.get("amount"));
         
@@ -315,7 +315,7 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-2\",\n"
                 + "    \"status\": \"Cancelled\"\n"
                 + "  }\n"
                 + "}";
@@ -351,14 +351,14 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-3\",\n"
                 + "    \"status\": \"Created\"\n"
                 + "  }\n"
                 + "}";
         
         InMemorySource<KafkaRecord<String, String>> channelOrders = connector.source("orders");          
         
-        String id = "ORDER-1";
+        String id = "ORDER-3";
         
         execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
@@ -376,7 +376,7 @@ public class VerificationTests {
         Object order = data.get("order");             
         assertNotNull(order);
         Map<String, Object> orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-3", orderAsMap.get("orderNumber"));
         assertEquals("Created", orderAsMap.get("status"));
         assertEquals(0.0, orderAsMap.get("amount"));
         
@@ -398,7 +398,7 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-3\",\n"
                 + "    \"status\": \"Cancelled\"\n"
                 + "  }\n"
                 + "}";
@@ -434,7 +434,7 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-4\",\n"
                 + "    \"status\": \"Created\"\n"
                 + "  }\n"
                 + "}";
@@ -442,7 +442,7 @@ public class VerificationTests {
         InMemorySource<KafkaRecord<String, String>> channelOrders = connector.source("orders");
         InMemorySource<KafkaRecord<String, String>> channelCustomers = connector.source("customers");  
         
-        String id = "ORDER-1";
+        String id = "ORDER-4";
         
         execCounter.reset(1);
         channelOrders.send(KafkaRecord.of(id, createdOrder));
@@ -460,7 +460,7 @@ public class VerificationTests {
         Object order = data.get("order");             
         assertNotNull(order);
         Map<String, Object> orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-4", orderAsMap.get("orderNumber"));
         assertEquals("Created", orderAsMap.get("status"));
         assertEquals(0.0, orderAsMap.get("amount"));
         
@@ -494,7 +494,7 @@ public class VerificationTests {
         order = data.get("order");             
         assertNotNull(order);
         orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-4", orderAsMap.get("orderNumber"));
         assertEquals("Created", orderAsMap.get("status"));
         assertEquals(0.0, orderAsMap.get("amount"));
         
@@ -514,7 +514,7 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-4\",\n"
                 + "    \"status\": \"Placed\"\n"
                 + "  }\n"
                 + "}";
@@ -527,7 +527,7 @@ public class VerificationTests {
         order = data.get("order");             
         assertNotNull(order);
         orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-4", orderAsMap.get("orderNumber"));
         assertEquals("Placed", orderAsMap.get("status"));
         assertEquals(36.0, orderAsMap.get("amount"));
         
@@ -562,7 +562,7 @@ public class VerificationTests {
         order = data.get("order");             
         assertNotNull(order);
         orderAsMap = (Map<String, Object>) order;
-        assertEquals("ORDER-1", orderAsMap.get("orderNumber"));
+        assertEquals("ORDER-4", orderAsMap.get("orderNumber"));
         assertEquals("Placed", orderAsMap.get("status"));
         assertEquals(36.0, orderAsMap.get("amount"));
         
@@ -591,7 +591,7 @@ public class VerificationTests {
                 + "      \"phone\": \"123456\"\n"
                 + "    },\n"
                 + "    \"orderDate\": \"2020-12-07\",\n"
-                + "    \"orderNumber\": \"ORDER-1\",\n"
+                + "    \"orderNumber\": \"ORDER-4\",\n"
                 + "    \"status\": \"Shipped\"\n"
                 + "  }\n"
                 + "}";
