@@ -26,18 +26,4 @@ jobs:
     - name: Build Automatiko
       run: mvn -B install -DskipTests --file automatiko/pom.xml
     - name: Build Automatiko Examples
-      run: mvn -B package -Pcontainer --file pom.xml
-    - name: Docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - name: Docker push
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker push $DOCKER_USER/event-streams-orders
-        docker push $DOCKER_USER/event-streams-sensors
-        docker push $DOCKER_USER/vacation-requests
-        docker push $DOCKER_USER/weather-conditions
+      run: mvn -B package -Pcontainer --file pom.xml -Dquarkus.container-image.push=true -Dquarkus.container-image.group=automatiko -Dquarkus.container-image.username=${{secrets.DOCKER_USER}} -Dquarkus.container-image.password=${{secrets.DOCKER_PASSWORD}}
