@@ -26,7 +26,7 @@ jobs:
     - name: Build Automatiko
       run: mvn -B install -DskipTests --file automatiko/pom.xml
     - name: Build Automatiko Examples
-      run: mvn -B package -pcontainer --file pom.xml
+      run: mvn -B package -Pcontainer --file pom.xml
     - name: Docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
