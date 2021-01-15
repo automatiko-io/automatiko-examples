@@ -25,8 +25,10 @@ jobs:
         java-version: 11
     - name: Build Automatiko
       run: mvn -B install -DskipTests --file automatiko/pom.xml
-    - name: Build Automatiko Examples
+    - name: Docker login
       env:
         QUARKUS_CONTAINER_IMAGE_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
         QUARKUS_CONTAINER_IMAGE_USERNAME: automatiko
+      run: docker login -u $QUARKUS_CONTAINER_IMAGE_USERNAME -p $QUARKUS_CONTAINER_IMAGE_PASSWORD
+    - name: Build Automatiko Examples
       run: mvn -B -Dquarkus.container-image.additional-tags=latest -Dquarkus.container-image.push=true -Dquarkus.container-image.group=automatiko  package -Pcontainer --file pom.xml
