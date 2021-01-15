@@ -1,7 +1,9 @@
-# Examples
+<p align="center">
+    <img src="img/automatiko-examples.png" width="700px" alt="Automatiko Examples"/>
+</p>
 
-Automatik examples are meant to showcase capabilities that implements
-use cases described. Each example is fully featured service that can be
+Automatiko examples are meant to showcase capabilities that implement
+use cases described. Each example is a fully featured service that can be
 easily tried as container to avoid any up front configuration on the environment.
 
 ## Order management
