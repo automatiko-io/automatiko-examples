@@ -26,4 +26,4 @@ jobs:
     - name: Build Automatiko
       run: mvn -B install -DskipTests --file automatiko/pom.xml
     - name: Build Automatiko Examples
-      run: mvn -B package -Pcontainer --file pom.xml -Dquarkus.container-image.push=true -Dquarkus.container-image.group=automatiko -Dquarkus.container-image.username=${{secrets.DOCKER_USER}} -Dquarkus.container-image.password=${{secrets.DOCKER_PASSWORD}}
+      run: mvn -B -Dquarkus.container-image.push=true -Dquarkus.container-image.group=automatiko -Dquarkus.container-image.username=automatiko -Dquarkus.container-image.password=${{secrets.DOCKER_PASSWORD}} package -Pcontainer --file pom.xml
