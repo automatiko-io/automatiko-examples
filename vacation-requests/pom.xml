@@ -13,18 +13,6 @@
   <name>Automatiko Examples:: Human Centric &amp; Database :: Vacation requests</name>
   <description>Automatiko Examples project showcasing human centric workflows and data base records processing</description>
 
-  <properties>
-    <quarkus.version>1.10.2.Final</quarkus.version>
-    <automatiko.version>0.0.0-SNAPSHOT</automatiko.version>
-    <surefire.version>2.22.1</surefire.version>
-    <compiler.version>3.8.1</compiler.version>
-
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
-
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
