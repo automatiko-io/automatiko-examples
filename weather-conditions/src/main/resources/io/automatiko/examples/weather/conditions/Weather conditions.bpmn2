@@ -180,7 +180,13 @@
         </automatiko:metaData>
       </bpmn2:extensionElements>
     </bpmn2:dataObject>
-    <bpmn2:dataObject id="forecast" name="forecast" itemSubjectRef="ItemDefinition_1088"/>
+    <bpmn2:dataObject id="forecast" name="forecast" itemSubjectRef="ItemDefinition_1088">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[output]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
     <bpmn2:userTask id="UserTask_6" name="Provide location manually">
       <bpmn2:extensionElements>
         <automatiko:metaData name="elementname">
