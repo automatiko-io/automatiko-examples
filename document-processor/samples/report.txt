@@ -1,0 +1,7 @@
+Automatiko Report
+
+Here is a simple report for testing purpose of Document Processor example of Automatiko.
+
+You will be asked to review and approve it so go ahead!!!
+
+Thanks :)
