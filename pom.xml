@@ -27,5 +27,6 @@
     <module>event-streams-sensors</module>
     <module>vacation-requests</module>
     <module>weather-conditions</module>
+    <module>document-processor</module>
   </modules>
 </project>
