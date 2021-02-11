@@ -34,3 +34,10 @@ Weather conditions is implementing `Service Orchestration` use case.
 
 Complete example description and instructions can be
 found [Weather conditions example](weather-conditions).
+
+## Document processor
+
+Document processor is implementing `Batch processing` use case.
+
+Complete example description and instructions can be
+found [Document processor example](document-processor).
