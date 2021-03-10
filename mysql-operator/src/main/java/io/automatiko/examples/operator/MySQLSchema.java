@@ -9,4 +9,14 @@ import io.fabric8.kubernetes.model.annotation.Version;
 @Version("v1")
 public class MySQLSchema extends CustomResource<SchemaSpec, SchemaStatus> implements Namespaced {
 
+    @Override
+    protected SchemaSpec initSpec() {
+        return new SchemaSpec();
+    }
+
+    @Override
+    protected SchemaStatus initStatus() {
+        return new SchemaStatus();
+    }
+
 }
