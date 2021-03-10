@@ -28,5 +28,6 @@
     <module>vacation-requests</module>
     <module>weather-conditions</module>
     <module>document-processor</module>
+    <module>mysql-operator</module>
   </modules>
 </project>
