@@ -41,3 +41,10 @@ Document processor is implementing `Batch processing` use case.
 
 Complete example description and instructions can be
 found [Document processor example](document-processor).
+
+## MySQL Schema Kubernetes Operator
+
+MySQL Schema Kubernetes Operator is implementing `Operator` use case.
+
+Complete example description and instructions can be
+found [MySQL Schema operator example](mysql-operator).

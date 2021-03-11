@@ -11,7 +11,7 @@
         <automatik:metaValue><![CDATA[PT20S]]></automatik:metaValue>
       </automatik:metaData>
       <automatik:metaData name="retryLimit">
-        <automatik:metaValue><![CDATA[4]]></automatik:metaValue>
+        <automatik:metaValue><![CDATA[1]]></automatik:metaValue>
       </automatik:metaData>
     </bpmn2:extensionElements>
   </bpmn2:error>
@@ -795,13 +795,13 @@ Invoked when MySQL schema custom resource has been updated allowing to ensure th
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_DataObject_5" bpmnElement="skipResourceUpdate">
         <dc:Bounds height="50.0" width="36.0" x="620.0" y="399.0"/>
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel id="BPMNLabel_34">
           <dc:Bounds height="22.0" width="62.0" x="607.0" y="449.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_ServiceTask_5" bpmnElement="ServiceTask_5" isExpanded="true">
         <dc:Bounds height="50.0" width="110.0" x="1470.0" y="146.0"/>
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel id="BPMNLabel_35">
           <dc:Bounds height="11.0" width="55.0" x="1497.0" y="165.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
@@ -881,13 +881,6 @@ Invoked when MySQL schema custom resource has been updated allowing to ensure th
         <di:waypoint xsi:type="dc:Point" x="320.0" y="212.0"/>
         <di:waypoint xsi:type="dc:Point" x="330.0" y="212.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_39"/>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="BPMNEdge_DataInputAssociation_3" bpmnElement="DataInputAssociation_3" sourceElement="BPMNShape_DataObject_3" targetElement="BPMNShape_ServiceTask_1">
-        <di:waypoint xsi:type="dc:Point" x="917.0" y="357.0"/>
-        <di:waypoint xsi:type="dc:Point" x="917.0" y="325.0"/>
-        <di:waypoint xsi:type="dc:Point" x="597.0" y="325.0"/>
-        <di:waypoint xsi:type="dc:Point" x="597.0" y="292.0"/>
-        <bpmndi:BPMNLabel id="BPMNLabel_40"/>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_4" bpmnElement="DataOutputAssociation_4" sourceElement="BPMNShape_ServiceTask_1" targetElement="BPMNShape_DataObject_4">
         <di:waypoint xsi:type="dc:Point" x="440.0" y="220.0"/>
@@ -1072,7 +1065,7 @@ Invoked when MySQL schema custom resource has been updated allowing to ensure th
         <di:waypoint xsi:type="dc:Point" x="1580.0" y="171.0"/>
         <di:waypoint xsi:type="dc:Point" x="1615.0" y="171.0"/>
         <di:waypoint xsi:type="dc:Point" x="1650.0" y="171.0"/>
-        <bpmndi:BPMNLabel/>
+        <bpmndi:BPMNLabel id="BPMNLabel_66"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
