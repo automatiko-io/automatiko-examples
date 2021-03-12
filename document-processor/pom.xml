@@ -12,7 +12,7 @@
   <description>Automatiko Examples project showcasing document processing as batch processing</description>
 
   <properties>
-    <camel.version>1.3.0</camel.version>
+    <camel.version>1.7.0</camel.version>
   </properties>
 
   <dependencyManagement>
