@@ -28,7 +28,7 @@
   <dependencies>
     <dependency>
       <groupId>io.automatiko.quarkus</groupId>
-      <artifactId>automatiko-operator</artifactId>
+      <artifactId>automatiko-operator</artifactId>      
     </dependency>
 
     <!-- automatiko process management addon - optional -->

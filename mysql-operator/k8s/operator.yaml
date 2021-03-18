@@ -35,7 +35,7 @@ spec:
         - name: MYSQL_PASSWORD
           value: password # sample-level security
         - name: QUARKUS_LAUNCH_DEVMODE
-          value: 'false' # to allow deployment in development mode
+          value: 'false' # to allow deployment in development mode set this to true
 
 ---
 apiVersion: v1
