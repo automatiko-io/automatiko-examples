@@ -432,7 +432,7 @@
         <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_27</bpmn2:outgoing>
         <bpmn2:script>setStatus(resource, url, username, secret);
-kcontext.setVariable(&quot;skipResourceUpdate&quot;, false);</bpmn2:script>
+context.setVariable(&quot;skipResourceUpdate&quot;, false);</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_27" automatik:priority="1" sourceRef="ScriptTask_4" targetRef="EndEvent_7"/>
       <bpmn2:scriptTask id="ScriptTask_5" name="Log updated" scriptFormat="http://www.java.com/java">
@@ -499,7 +499,7 @@ kcontext.setVariable(&quot;skipResourceUpdate&quot;, false);</bpmn2:script>
       <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_24</bpmn2:outgoing>
       <bpmn2:script>setStatus(resource, url, username, secret);
-kcontext.setVariable(&quot;skipResourceUpdate&quot;, null);</bpmn2:script>
+context.setVariable(&quot;skipResourceUpdate&quot;, null);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_24" automatik:priority="1" sourceRef="ScriptTask_3" targetRef="EndEvent_1"/>
     <bpmn2:boundaryEvent id="BoundaryEvent_1" name="" attachedToRef="ServiceTask_1">
@@ -557,7 +557,7 @@ kcontext.setVariable(&quot;skipResourceUpdate&quot;, null);</bpmn2:script>
       <bpmn2:incoming>SequenceFlow_29</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_31</bpmn2:outgoing>
       <bpmn2:script>setErrorStatus(resource, &quot;schema creation failure&quot;);
-kcontext.setVariable(&quot;skipResourceUpdate&quot;, false);</bpmn2:script>
+context.setVariable(&quot;skipResourceUpdate&quot;, false);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_31" automatik:priority="1" sourceRef="ScriptTask_6" targetRef="ServiceTask_6"/>
     <bpmn2:dataObject id="skipResourceUpdate" name="skipResourceUpdate" itemSubjectRef="ItemDefinition_3">

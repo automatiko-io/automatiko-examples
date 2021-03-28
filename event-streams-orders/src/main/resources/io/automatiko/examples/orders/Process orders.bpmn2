@@ -329,7 +329,7 @@
         </bpmn2:extensionElements>
         <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_18</bpmn2:outgoing>
-        <bpmn2:script>kcontext.setVariable(&quot;order&quot;, event.getOrder());</bpmn2:script>
+        <bpmn2:script>context.setVariable(&quot;order&quot;, event.getOrder());</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_18" automatiko:priority="1" sourceRef="ScriptTask_2" targetRef="BusinessRuleTask_3"/>
       <bpmn2:businessRuleTask id="BusinessRuleTask_3" name="Calculate order amount" implementation="http://www.jboss.org/drools/dmn">
@@ -492,7 +492,7 @@
         <bpmn2:incoming>SequenceFlow_23</bpmn2:incoming>
         <bpmn2:outgoing>SequenceFlow_31</bpmn2:outgoing>
         <bpmn2:script>order.setCustomer(customer);
-kcontext.setVariable(&quot;order&quot;, order);</bpmn2:script>
+context.setVariable(&quot;order&quot;, order);</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_23" automatiko:priority="1" sourceRef="ExclusiveGateway_3" targetRef="ScriptTask_3">
         <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_27" language="http://www.java.com/java">!customer.getAddress().equals(order.getCustomer().getAddress())</bpmn2:conditionExpression>
@@ -518,7 +518,7 @@ kcontext.setVariable(&quot;order&quot;, order);</bpmn2:script>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_47</bpmn2:outgoing>
-      <bpmn2:script>kcontext.setVariable(&quot;order&quot;, event.getOrder());</bpmn2:script>
+      <bpmn2:script>context.setVariable(&quot;order&quot;, event.getOrder());</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_16" automatiko:priority="1" sourceRef="ParallelGateway_1" targetRef="EventBasedGateway_1"/>
     <bpmn2:dataObject id="customer" name="customer" itemSubjectRef="ItemDefinition_2246">

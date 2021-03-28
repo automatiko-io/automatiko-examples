@@ -131,7 +131,7 @@
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
       <bpmn2:script>vacation.used = vacation.used + request.length;
-kcontext.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
+context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:serviceTask id="ServiceTask_2" name="Notify approval" implementation="Java" operationRef="Operation_2">
       <bpmn2:extensionElements>
@@ -214,8 +214,8 @@ kcontext.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
       <bpmn2:script>vacation.used = vacation.used - request.length;
 request.cancelled = true;
 
-kcontext.setVariable(&quot;request&quot;, request);
-kcontext.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
+context.setVariable(&quot;request&quot;, request);
+context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:endEvent id="EndEvent_1" name="Request cancelled">
       <bpmn2:extensionElements>
@@ -303,8 +303,8 @@ kcontext.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
       <bpmn2:script>vacation.used = vacation.used - request.length;
 request.cancelled = true;
 
-kcontext.setVariable(&quot;request&quot;, request);
-kcontext.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
+context.setVariable(&quot;request&quot;, request);
+context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_15" automatiko:priority="1" sourceRef="ScriptTask_3" targetRef="EndEvent_2"/>
   </bpmn2:process>

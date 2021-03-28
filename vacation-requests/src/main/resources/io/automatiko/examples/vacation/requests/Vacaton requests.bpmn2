@@ -201,7 +201,7 @@
         <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
         <bpmn2:script>vrequests.add(request);
 
-kcontext.setVariable(&quot;vrequests&quot;, vrequests);</bpmn2:script>
+context.setVariable(&quot;vrequests&quot;, vrequests);</bpmn2:script>
       </bpmn2:scriptTask>
       <bpmn2:sequenceFlow id="SequenceFlow_9" automatiko:priority="1" sourceRef="ExclusiveGateway_1" targetRef="ScriptTask_3"/>
       <bpmn2:serviceTask id="ServiceTask_1" name="Notify not enough days" implementation="Java" operationRef="Operation_1">
