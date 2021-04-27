@@ -217,7 +217,7 @@ public class VerificationTests {
             .accept(ContentType.JSON)
             .body(payload)
         .when()
-            .post("/zip/" + id + "/" + reference)
+            .post(reference)
         .then()
             .statusCode(200);  
         

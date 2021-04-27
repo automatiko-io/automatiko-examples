@@ -4,7 +4,7 @@
   <bpmn2:itemDefinition id="ItemDefinition_21" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.Employee"/>
   <bpmn2:itemDefinition id="ItemDefinition_732" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.Vacation"/>
   <bpmn2:itemDefinition id="ItemDefinition_923" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.Request"/>
-  <bpmn2:itemDefinition id="ItemDefinition_1084" isCollection="false" structureRef="java.util.List&lt;io.automatiko.examples.vacation.requests.Request&gt;"/>
+  <bpmn2:itemDefinition id="ItemDefinition_1084" isCollection="false" structureRef="java.util.Set&lt;io.automatiko.examples.vacation.requests.Request&gt;"/>
   <bpmn2:itemDefinition id="ItemDefinition_1403" isCollection="false" structureRef="java.lang.String"/>
   <bpmn2:itemDefinition id="ItemDefinition_2666" isCollection="false" structureRef="io.automatiko.examples.vacation.requests.service.NotificationService"/>
   <bpmn2:itemDefinition id="ItemDefinition_240" isCollection="false" structureRef="java.lang.Integer"/>
@@ -351,9 +351,9 @@ context.setVariable(&quot;vrequests&quot;, vrequests);</bpmn2:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
-        <dc:Bounds height="36.0" width="36.0" x="110.0" y="231.0"/>
+        <dc:Bounds height="36.0" width="36.0" x="108.0" y="212.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_2" labelStyle="BPMNLabelStyle_1">
-          <dc:Bounds height="11.0" width="59.0" x="99.0" y="267.0"/>
+          <dc:Bounds height="11.0" width="59.0" x="97.0" y="248.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_DataObject_1" bpmnElement="employee">
@@ -453,8 +453,9 @@ context.setVariable(&quot;vrequests&quot;, vrequests);</bpmn2:script>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_BusinessRuleTask_1">
-        <di:waypoint xsi:type="dc:Point" x="146.0" y="249.0"/>
-        <di:waypoint xsi:type="dc:Point" x="197.0" y="249.0"/>
+        <di:waypoint xsi:type="dc:Point" x="144.0" y="230.0"/>
+        <di:waypoint xsi:type="dc:Point" x="196.0" y="230.0"/>
+        <di:waypoint xsi:type="dc:Point" x="196.0" y="249.0"/>
         <di:waypoint xsi:type="dc:Point" x="249.0" y="249.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_19"/>
       </bpmndi:BPMNEdge>
