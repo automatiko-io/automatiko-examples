@@ -10,8 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import io.quarkus.mailer.Mail;
+import io.quarkus.mailer.MockMailbox;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
@@ -19,6 +24,13 @@ import io.restassured.http.ContentType;
 public class VerificationTests {
  // @formatter:off
     
+    @Inject
+    MockMailbox mailbox;
+
+    @BeforeEach
+    void init() {
+        mailbox.clear();
+    }
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
@@ -99,8 +111,7 @@ public class VerificationTests {
             .auth().basic("mary@email.com", "mary")
         .when()
             .get("/vacations/" + id)
-        .then()
-            
+        .then()            
             .statusCode(200).body("id", is(id)).extract().as(Map.class);
         
         vrequests = (List<?>) data.get("vrequests");
@@ -108,6 +119,15 @@ public class VerificationTests {
         
         assertEquals(1, vrequests.size());
         assertNotNull(vacation);
+        
+        // verify that emails were sent
+        List<Mail> sent = mailbox.getMessagesSentTo("mary@email.com");
+        assertEquals(1, sent.size());
+
+        sent = mailbox.getMessagesSentTo("john@email.com");
+        assertEquals(1, sent.size());
+
+        assertEquals(2, mailbox.getTotalMessagesSent());
 
         List<Map<String, String>> taskInfo = given()
                 .accept(ContentType.JSON)
@@ -125,6 +145,19 @@ public class VerificationTests {
         String taskName = taskInfo.get(0).get("name");
         
         assertEquals("approval", taskName);
+        
+        String referenceId = taskInfo.get(0).get("reference");
+        
+        Map taskData = given()
+                .accept(ContentType.JSON)
+                .auth().basic("john@email.com", "john")
+            .when()
+                .get(referenceId)
+            .then()            
+                .statusCode(200).extract().as(Map.class);
+        assertNotNull(taskData);
+        assertNotNull(taskData.get("request"));
+        assertNotNull(taskData.get("employee"));
         
         String payload = "{\"approved\" : true}";
         given().
