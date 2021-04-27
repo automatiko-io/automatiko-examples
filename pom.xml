@@ -14,7 +14,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
 
-    <quarkus.version>1.13.0.Final</quarkus.version>
+    <quarkus.version>1.13.2.Final</quarkus.version>
     <automatiko.version>${project.version}</automatiko.version>
     <wiremock.version>2.27.2</wiremock.version>
 
