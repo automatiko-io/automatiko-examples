@@ -10,10 +10,10 @@ import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import io.automatiko.engine.addons.usertasks.email.EmailAddressResolver;
+import io.automatiko.engine.addons.usertasks.email.impl.DefaultEmailAddressResolver;
 
 @ApplicationScoped
-public class CustomEmailAddressResolver implements EmailAddressResolver {
+public class CustomEmailAddressResolver extends DefaultEmailAddressResolver {
 
     private Optional<String> to;
 
@@ -25,18 +25,19 @@ public class CustomEmailAddressResolver implements EmailAddressResolver {
     @Override
     public Map<String, String> resolve(Collection<String> users, Collection<String> groups) {
 
-        Map<String, String> emails = new HashMap<>();
-
         if (to.isPresent()) {
+            Map<String, String> emails = new HashMap<>();
             if (users != null) {
                 users.stream().forEach(s -> emails.put(s, to.get()));
             }
             if (groups != null) {
                 groups.stream().forEach(s -> emails.put(s, to.get()));
             }
+            return emails;
+        } else {
+            return super.resolve(users, groups);
         }
 
-        return emails;
     }
 
 }
