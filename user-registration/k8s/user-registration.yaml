@@ -1,0 +1,157 @@
+apiVersion: sources.knative.dev/v1beta1
+kind: SinkBinding
+metadata:
+  name: bind-user-registration
+spec:
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: user-registration
+
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: user-registration
+spec:
+  template:
+    metadata:
+      name: user-registration-v1
+      annotations:
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: automatiko/user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: userregistration
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: getuser
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.getuser
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notregistered
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.notregistered
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: generateusernameandpassword
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.generateusernameandpassword
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: registeruser
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.registeruser
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notifyregistered
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.notifyregistered
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notifyservererror
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.notifyservererror
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: servererror
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.servererror
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration
