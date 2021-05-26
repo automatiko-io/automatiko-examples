@@ -14,7 +14,7 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
 
-    <quarkus.version>1.13.2.Final</quarkus.version>
+    <quarkus.version>1.13.4.Final</quarkus.version>
     <automatiko.version>${project.version}</automatiko.version>
     <wiremock.version>2.27.2</wiremock.version>
 
@@ -29,5 +29,6 @@
     <module>weather-conditions</module>
     <module>document-processor</module>
     <module>mysql-operator</module>
+    <module>user-registration</module>
   </modules>
 </project>
