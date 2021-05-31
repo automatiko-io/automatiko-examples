@@ -1,0 +1,157 @@
+apiVersion: sources.knative.dev/v1beta1
+kind: SinkBinding
+metadata:
+  name: bind-user-registration-sw
+spec:
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: user-registration-sw
+
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: user-registration-sw
+spec:
+  template:
+    metadata:
+      name: user-registration-sw-v1
+      annotations:
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: mswiderski/user-registration-sw:0.0.0-SNAPSHOT
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: userregistration
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: sendservererrornotification
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.sendservererrornotification
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: validateuser
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.validateuser
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: generateusernameandpassword
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.generateusernameandpassword
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: isuserregistered
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.isuserregistered
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: create
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.create
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notifyinvaliddata
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.notifyinvaliddata
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: sendsuccessfulnotification
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.serverless.userRegistration.sendsuccessfulnotification
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: user-registration-sw
