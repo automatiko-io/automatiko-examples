@@ -30,5 +30,6 @@
     <module>document-processor</module>
     <module>mysql-operator</module>
     <module>user-registration</module>
+    <module>user-registration-sw</module>
   </modules>
 </project>

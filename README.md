@@ -48,3 +48,12 @@ MySQL Schema Kubernetes Operator is implementing `Operator` use case.
 
 Complete example description and instructions can be
 found [MySQL Schema operator example](mysql-operator).
+
+## User registration
+
+User registration is implementing `Service Orchestration` use case in a form of
+workflow as a function flow.
+
+Complete example description and instructions can be
+found [User registration BPMN example](user-registration) and
+[User registration Serverless Workflow example](user-registration-sw) .
