@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.automatiko.examples</groupId>
-    <artifactId>automatiko-examples</artifactId>    
+    <artifactId>automatiko-examples</artifactId>
     <version>0.0.0-SNAPSHOT</version>
   </parent>
   <artifactId>document-processor</artifactId>
@@ -12,7 +12,7 @@
   <description>Automatiko Examples project showcasing document processing as batch processing</description>
 
   <properties>
-    <camel.version>1.7.0</camel.version>
+    <camel.version>2.0.0</camel.version>
   </properties>
 
   <dependencyManagement>
@@ -32,38 +32,38 @@
       <groupId>io.automatiko.quarkus</groupId>
       <artifactId>automatiko-service</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>io.automatiko.addons</groupId>
       <artifactId>automatiko-filesystem-persistence-addon</artifactId>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.camel.quarkus</groupId>
       <artifactId>camel-quarkus-smallrye-reactive-messaging</artifactId>
       <version>${camel.version}</version>
     </dependency>
-    
+
     <dependency>
       <groupId>org.apache.camel.quarkus</groupId>
       <artifactId>camel-quarkus-file</artifactId>
       <version>${camel.version}</version>
-    </dependency>   
-    
+    </dependency>
+
     <!-- automatiko process management addon - optional -->
     <dependency>
       <groupId>io.automatiko.addons</groupId>
       <artifactId>automatiko-process-management-addon</artifactId>
     </dependency>
-    
+
     <!--  validation - optional -->
-    <!-- 
+    <!--
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-validator</artifactId>
     </dependency>
      -->
-    
+
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
