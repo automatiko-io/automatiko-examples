@@ -56,4 +56,15 @@ workflow as a function flow.
 
 Complete example description and instructions can be
 found [User registration BPMN example](user-registration) and
-[User registration Serverless Workflow example](user-registration-sw) .
+[User registration Serverless Workflow example](user-registration-sw).
+
+Additionally there is a dedicated User Registration example that is tailored to run 
+on Google CloudRun, see  [User Registration on Google CloudRun](user-registration-sw)
+
+
+## Support incidents
+
+Support incidents is implementing `Human Centric` use case backed by Apache Cassandra database.
+
+Complete example description and instructions can be
+found [Support incidents example](support-incidents).

@@ -31,5 +31,7 @@
     <module>mysql-operator</module>
     <module>user-registration</module>
     <module>user-registration-sw</module>
+    <module>user-registration-gcp-cloudrun</module>
+    <module>support-incidents</module>
   </modules>
 </project>
