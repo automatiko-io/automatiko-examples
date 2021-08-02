@@ -59,7 +59,7 @@ found [User registration BPMN example](user-registration) and
 [User registration Serverless Workflow example](user-registration-sw).
 
 Additionally there is a dedicated User Registration example that is tailored to run 
-on Google CloudRun, see  [User Registration on Google CloudRun](user-registration-sw)
+on Google CloudRun, see  [User Registration on Google CloudRun](user-registration-gcp-cloudrun)
 
 
 ## Support incidents
