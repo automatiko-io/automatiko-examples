@@ -38,6 +38,9 @@ create following topics
 - io.automatiko.examples.userRegistration.generateusernameandpassword
 - io.automatiko.examples.userRegistration.registeruser
 - io.automatiko.examples.userRegistration.notifyregistered
+- io.automatiko.examples.userRegistration.userregistered
+- io.automatiko.examples.userRegistration.alreadyregistered
+- io.automatiko.examples.userRegistration.invaliddata
 
 when deploying to CloudRun create triggers for each of the topic that is PubSub with messagePublished event.
 

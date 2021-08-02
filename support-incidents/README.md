@@ -33,7 +33,7 @@ http://localhost:8080/management/processes/ui
 ## Use it
 
 
-### Start new instance for an IP
+### Start new instance to register incident
 
 - Http Method: `POST`
 - Endpoint: `http://localhost:8080/v1_0/incidents`
