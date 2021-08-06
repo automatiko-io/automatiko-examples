@@ -25,9 +25,6 @@
       <automatiko:import name="io.automatiko.examples.registration.service.UserService"/>
       <automatiko:import name="io.automatiko.examples.registration.service.NotificationService"/>
       <automatiko:import name="io.automatiko.engine.app.rest.model.User"/>
-      <automatiko:metaData name="functionFilter">
-        <automatiko:metaValue><![CDATA[source=//pubsub.googleapis.com/projects/{quarkus.google.cloud.project-id}/topics/io.automatiko.examples.userRegistration]]></automatiko:metaValue>
-      </automatiko:metaData>
     </bpmn2:extensionElements>
     <bpmn2:startEvent id="StartEvent_1" name="StartProcess">
       <bpmn2:extensionElements>
@@ -41,9 +38,6 @@
       <bpmn2:extensionElements>
         <automatiko:metaData name="elementname">
           <automatiko:metaValue><![CDATA[Get user]]></automatiko:metaValue>
-        </automatiko:metaData>
-        <automatiko:metaData name="functionFilter">
-          <automatiko:metaValue><![CDATA[source=//pubsub.googleapis.com/projects/{quarkus.google.cloud.project-id}/topics/io.automatiko.examples.userRegistration.getuser]]></automatiko:metaValue>
         </automatiko:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
@@ -121,9 +115,6 @@
         <automatiko:metaData name="elementname">
           <automatiko:metaValue><![CDATA[Generate username and password]]></automatiko:metaValue>
         </automatiko:metaData>
-        <automatiko:metaData name="functionFilter">
-          <automatiko:metaValue><![CDATA[source=//pubsub.googleapis.com/projects/{quarkus.google.cloud.project-id}/topics/io.automatiko.examples.userRegistration.generateusernameandpassword]]></automatiko:metaValue>
-        </automatiko:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
@@ -195,9 +186,6 @@
         <automatiko:metaData name="elementname">
           <automatiko:metaValue><![CDATA[Register user]]></automatiko:metaValue>
         </automatiko:metaData>
-        <automatiko:metaData name="functionFilter">
-          <automatiko:metaValue><![CDATA[source=//pubsub.googleapis.com/projects/{quarkus.google.cloud.project-id}/topics/io.automatiko.examples.userRegistration.registeruser]]></automatiko:metaValue>
-        </automatiko:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_13</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
@@ -218,9 +206,6 @@
       <bpmn2:extensionElements>
         <automatiko:metaData name="elementname">
           <automatiko:metaValue><![CDATA[Notify registered]]></automatiko:metaValue>
-        </automatiko:metaData>
-        <automatiko:metaData name="functionFilter">
-          <automatiko:metaValue><![CDATA[source=//pubsub.googleapis.com/projects/{quarkus.google.cloud.project-id}/topics/io.automatiko.examples.userRegistration.notifyregistered]]></automatiko:metaValue>
         </automatiko:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
@@ -251,9 +236,6 @@
       <bpmn2:extensionElements>
         <automatiko:metaData name="elementname">
           <automatiko:metaValue><![CDATA[Notify server error]]></automatiko:metaValue>
-        </automatiko:metaData>
-        <automatiko:metaData name="functionFilter">
-          <automatiko:metaValue><![CDATA[source=//pubsub.googleapis.com/projects/{quarkus.google.cloud.project-id}/topics/io.automatiko.examples.userRegistration.notifyservererror]]></automatiko:metaValue>
         </automatiko:metaData>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_14</bpmn2:incoming>

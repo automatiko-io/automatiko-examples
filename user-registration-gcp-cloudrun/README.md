@@ -23,7 +23,7 @@ Workflow as a function flow takes advantage of KNative Eventing as the backbone 
 So to be able to fully see this example in action a Kubernetes cluster with KNative installed is required. You can follow the
 official [KNative documentation about installation steps](https://knative.dev/docs/install/)
 
-This project is configured to run on [Google CloudRun]](https://cloud.google.com/run) and use Google PubSub/Eventarc to trigger functions.
+This project is configured to run on [Google CloudRun](https://cloud.google.com/run) and use Google PubSub/Eventarc to trigger functions.
 
 You need to create a project and enable CloudRun to completely use this example. It's id should be defined in application.properties
 file that is located under `src/main/resources` folder
@@ -43,6 +43,9 @@ create following topics
 - io.automatiko.examples.userRegistration.invaliddata
 
 when deploying to CloudRun create triggers for each of the topic that is PubSub with messagePublished event.
+
+NOTE: For your convenience Automatiko generates a complete set of scripts for `gcloud` that are ready to be used. 
+Look into `target/scripts` folder to find `gcloud scripts` for both deploying and undeploying.   
 
 Once that is done you can publish first message (using Google Console) to the io.automatiko.examples.userRegistration topic
 with following content.
