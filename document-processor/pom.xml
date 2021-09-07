@@ -11,10 +11,6 @@
   <name>Automatiko Examples:: Batch :: Document processor</name>
   <description>Automatiko Examples project showcasing document processing as batch processing</description>
 
-  <properties>
-    <camel.version>2.0.0</camel.version>
-  </properties>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
