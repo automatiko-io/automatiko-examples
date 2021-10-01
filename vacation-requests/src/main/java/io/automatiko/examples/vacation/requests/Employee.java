@@ -34,4 +34,5 @@ public class Employee extends PanacheEntity {
         return "Employee [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", startedAt=" + startedAt
                 + ", department=" + department + ", manager=" + manager + "]";
     }
+
 }
