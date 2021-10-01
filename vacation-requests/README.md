@@ -166,3 +166,146 @@ complete curl command for this request is as follows
 curl -u mary@email.com:mary -X DELETE "http://localhost:8080/vacations/mary%40email.com" -H  "accept: application/json"
 ````
 
+
+### Use it with GraphQL interface
+
+Same example can be performed via GraphQL service interface. All the operations can be performed via GraphQL UI
+[http://localhost:8080/graphql-ui](http://localhost:8080/graphql-ui)
+
+#### Create new vacation request instance
+
+````
+mutation {
+  create_vacations(data: {employee: { email: "mary@email.com", firstName: "Mary", lastName: "Jane", startedAt: "2000-12-01T19:20+01:00", department: "finance" }}) {
+    id,
+    employee {
+      department,
+      manager
+    },
+    vacation {
+      eligible,
+      used
+    }
+  }
+}
+````
+
+#### Fetch information about the running instances
+
+````
+query {
+  get_all_vacations(user:"mary@email.com") {
+    id,
+    employee {
+      firstName,
+      manager
+    },
+    requests {
+    	request {
+        key,
+        from,
+        to
+      }
+    }
+  }
+}
+
+````
+
+
+#### Submit one request for days off
+
+````
+mutation {
+  signal_submit_0(id:"mary@email.com", user:"mary@email.com", model: {key:"xmas", from:"2021-12-24T00:00+01:00", to:"2021-12-28T00:00+01:00", length:4}) {
+    requests {
+      request {
+        key
+      }
+    },
+    vacation {
+      eligible,
+      used
+    }
+  }
+}
+
+````
+
+##### Get tasks as manager
+
+````
+query {
+  get_vacations_tasks(id:"mary@email.com", user:"john@email.com") {
+    name,
+    formLink,
+    id
+  }
+}
+
+````
+
+##### Get tasks as requestor
+
+````
+query {
+  get_vacations_tasks(id:"mary@email.com", user:"mary@email.com") {
+    name,
+    formLink,
+    id
+  }
+}
+
+````
+
+
+#### Approve or reject vacation request 
+
+````
+mutation {
+  vacations_completeTask_approval_0(parentId:"mary@email.com", id:"xmas", workItemId: "XXXXXXXX", user:"john@email.com", data: {approved:true}) {
+    request {
+      key,
+      approved
+    }
+  }
+}
+````
+
+Replace `XXXXXXXX` with actual task id from previous call that fetched tasks for manager
+
+##### Optionally cancel request if no longer needed
+
+````
+mutation {
+  vacations_completeTask_cancel_1(parentId:"mary@email.com", id:"xmas", workItemId: "XXXXXXXX", user:"mary@email.com", data: {reason:"need to change my plans"}) {
+    request {
+      key,
+      approved,
+      cancelled,
+      comment
+    }
+  }
+}
+
+````
+
+Replace `XXXXXXXX` with actual task id from previous call that fetched tasks for manager
+
+##### Delete vacation request instance
+
+````
+mutation {
+  delete_vacations(id:"mary@email.com", user: "mary@email.com") {
+    id,
+    employee {
+      department,
+      manager
+    },
+    vacation {
+      eligible,
+      used
+    }
+  }
+}
+````

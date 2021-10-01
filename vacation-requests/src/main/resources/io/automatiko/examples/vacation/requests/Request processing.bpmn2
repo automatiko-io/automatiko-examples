@@ -172,13 +172,16 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
         <bpmn2:dataInput id="DataInput_5" name="Exluded users"/>
         <bpmn2:dataInput id="DataInput_6" name="Groups"/>
         <bpmn2:dataInput id="DataInput_11" itemSubjectRef="ItemDefinition_413" name="request"/>
+        <bpmn2:dataOutput id="DataOutput_3" itemSubjectRef="ItemDefinition_2304" name="reason"/>
         <bpmn2:inputSet id="_InputSet_3">
           <bpmn2:dataInputRefs>DataInput_4</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>DataInput_5</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>DataInput_6</bpmn2:dataInputRefs>
           <bpmn2:dataInputRefs>DataInput_11</bpmn2:dataInputRefs>
         </bpmn2:inputSet>
-        <bpmn2:outputSet id="OutputSet_2" name="Output Set"/>
+        <bpmn2:outputSet id="OutputSet_2" name="Output Set">
+          <bpmn2:dataOutputRefs>DataOutput_3</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
       </bpmn2:ioSpecification>
       <bpmn2:dataInputAssociation id="DataInputAssociation_4">
         <bpmn2:targetRef>DataInput_4</bpmn2:targetRef>
@@ -197,6 +200,10 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
         <bpmn2:sourceRef>request</bpmn2:sourceRef>
         <bpmn2:targetRef>DataInput_11</bpmn2:targetRef>
       </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_3">
+        <bpmn2:sourceRef>DataOutput_3</bpmn2:sourceRef>
+        <bpmn2:targetRef>reason</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
       <bpmn2:potentialOwner id="PotentialOwner_1" name="Potential Owner 1">
         <bpmn2:resourceAssignmentExpression id="ResourceAssignmentExpression_1">
           <bpmn2:formalExpression id="FormalExpression_13">#{employee.email}</bpmn2:formalExpression>
@@ -307,6 +314,13 @@ context.setVariable(&quot;request&quot;, request);
 context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:sequenceFlow id="SequenceFlow_15" automatiko:priority="1" sourceRef="ScriptTask_3" targetRef="EndEvent_2"/>
+    <bpmn2:dataObject id="reason" name="reason" itemSubjectRef="ItemDefinition_2304">
+      <bpmn2:extensionElements>
+        <automatiko:metaData name="tags">
+          <automatiko:metaValue><![CDATA[output]]></automatiko:metaValue>
+        </automatiko:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:dataObject>
   </bpmn2:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="requests">
@@ -418,6 +432,12 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
         <dc:Bounds height="50.0" width="110.0" x="840.0" y="95.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_18">
           <dc:Bounds height="22.0" width="90.0" x="850.0" y="109.0"/>
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_DataObject_5" bpmnElement="reason">
+        <dc:Bounds height="50.0" width="36.0" x="90.0" y="443.0"/>
+        <bpmndi:BPMNLabel>
+          <dc:Bounds height="11.0" width="28.0" x="94.0" y="493.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_ParallelGateway_1">
@@ -551,6 +571,13 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
         <di:waypoint xsi:type="dc:Point" x="975.0" y="120.0"/>
         <di:waypoint xsi:type="dc:Point" x="1001.0" y="120.0"/>
         <bpmndi:BPMNLabel id="BPMNLabel_36"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_DataOutputAssociation_1" bpmnElement="DataOutputAssociation_3" sourceElement="BPMNShape_UserTask_2" targetElement="BPMNShape_DataObject_5">
+        <di:waypoint xsi:type="dc:Point" x="302.0" y="366.0"/>
+        <di:waypoint xsi:type="dc:Point" x="214.0" y="366.0"/>
+        <di:waypoint xsi:type="dc:Point" x="214.0" y="468.0"/>
+        <di:waypoint xsi:type="dc:Point" x="126.0" y="468.0"/>
+        <bpmndi:BPMNLabel/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">

@@ -17,4 +17,5 @@ public class Vacation extends PanacheEntity {
     public String toString() {
         return "Vacation [eligible=" + eligible + ", used=" + used + "]";
     }
+
 }
