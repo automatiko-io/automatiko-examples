@@ -32,6 +32,9 @@
       <automatik:import name="io.automatiko.examples.support.incidents.service.NotificationService"/>
       <automatik:import name="io.automatiko.examples.support.incidents.service.AssignmentService"/>
       <automatik:import name="io.automatiko.examples.support.incidents.Comment"/>
+      <automatik:metaData name="tags">
+        <automatik:metaValue><![CDATA[#{incident.getReporter().getCompany()},#{incident.getReporter().getEmail()}]]></automatik:metaValue>
+      </automatik:metaData>
     </bpmn2:extensionElements>
     <bpmn2:startEvent id="StartEvent_1" name="new incident">
       <bpmn2:extensionElements>
@@ -818,7 +821,7 @@
         <di:waypoint xsi:type="dc:Point" x="855.0" y="298.0"/>
         <di:waypoint xsi:type="dc:Point" x="305.0" y="298.0"/>
         <di:waypoint xsi:type="dc:Point" x="305.0" y="450.0"/>
-        <bpmndi:BPMNLabel/>
+        <bpmndi:BPMNLabel id="BPMNLabel_57"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

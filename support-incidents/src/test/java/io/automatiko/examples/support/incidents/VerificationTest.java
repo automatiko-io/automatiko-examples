@@ -56,6 +56,20 @@ public class VerificationTest {
             .body("$.size()", is(1));
         
         given()
+            .accept(ContentType.JSON)
+        .when()
+            .get("/v1_0/incidents?tags="+id)
+        .then().statusCode(200)
+            .body("$.size()", is(1));
+
+        given()
+            .accept(ContentType.JSON)
+        .when()
+            .get("/v1_0/incidents?tags=wrong")
+        .then().statusCode(200)
+            .body("$.size()", is(0));
+        
+        given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .body("{\n"
