@@ -309,3 +309,9 @@ mutation {
   }
 }
 ````
+
+In addition, there is a dedicated subscription that allows to be notified on user tasks being assigned. This can be easily tried
+with index-graphql.html that is part of this service. Just point your browser to 
+[http://localhost:8080/index-graphql.html](http://localhost:8080/index-graphql.html) and connect with user name that you want to receive task for. For example 
+- mary@email.com to receive Mary's tasks such as `Cancel Vacation` tasks
+- john@email.com to receive John's tasks as manager
