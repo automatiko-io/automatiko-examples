@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.automatiko.examples</groupId>
   <artifactId>automatiko-examples</artifactId>
-  <version>0.0.0-SNAPSHOT</version>
+  <version>0.9.0</version>
   <packaging>pom</packaging>
   <name>Automatiko :: Examples</name>
   <description>Complete examples for Automatiko use cases</description>
@@ -15,7 +15,7 @@
     <maven.compiler.source>11</maven.compiler.source>
 
     <quarkus.version>2.3.0.Final</quarkus.version>
-    <camel.version>2.2.0</camel.version>
+    <camel.version>2.3.0</camel.version>
     <automatiko.version>${project.version}</automatiko.version>
     <wiremock.version>2.27.2</wiremock.version>
 
