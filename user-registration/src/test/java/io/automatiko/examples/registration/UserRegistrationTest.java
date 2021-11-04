@@ -42,7 +42,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration", data.source);
+        assertEquals("io.automatiko.examples.userRegistration", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.type);
 
         
@@ -63,7 +63,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.getuser", data.type);  
         
         given()
@@ -83,7 +83,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.getuser", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.getuser", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.registeruser", data.type);   
         
         given()
@@ -103,7 +103,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.registeruser", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.registeruser", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.notifyregistered", data.type);   
         
         given()
@@ -123,7 +123,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.notifyregistered", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.notifyregistered", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.userregistered", data.type);     
     }
     
@@ -146,7 +146,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration", data.source);
+        assertEquals("io.automatiko.examples.userRegistration", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.type);
 
         
@@ -167,7 +167,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.getuser", data.type);  
         
         given()
@@ -187,7 +187,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.getuser", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.getuser", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.alreadyregistered", data.type);   
           
     }
@@ -211,7 +211,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration", data.source);
+        assertEquals("io.automatiko.examples.userRegistration", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.invaliddata", data.type);        
           
     }
@@ -235,7 +235,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration", data.source);
+        assertEquals("io.automatiko.examples.userRegistration", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.type);
 
         
@@ -256,7 +256,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.generateusernameandpassword", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.getuser", data.type);  
         
         given()
@@ -276,7 +276,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.getuser", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.getuser", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.registeruser", data.type);   
         
         given()
@@ -296,7 +296,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.registeruser", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.registeruser", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.notifyservererror", data.type);   
         
         given()
@@ -316,7 +316,7 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.examples.userRegistration.notifyservererror", data.source);
+        assertEquals("io.automatiko.examples.userRegistration.notifyservererror", data.source.split("/")[0]);
         assertEquals("io.automatiko.examples.userRegistration.registrationfailed", data.type);     
     }
     
