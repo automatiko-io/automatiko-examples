@@ -29,7 +29,7 @@ public class UserRegistrationTest {
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body("{\"user\" : {\"email\" : \"mike.strong@email.com\",  \"firstName\" : \"mike\",  \"lastName\" : \"strong\"}}")
@@ -42,15 +42,15 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.generateusernameandpassword", data.type);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword", data.type);
 
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.generateusernameandpassword")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -63,14 +63,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.generateusernameandpassword", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.isuserregistered", data.type);  
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.type);  
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.isuserregistered")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.isuserregistered")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -83,14 +83,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.isuserregistered", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.create", data.type);   
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.create", data.type);   
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.create")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.create")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -103,14 +103,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.create", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.sendsuccessfulnotification", data.type);   
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.create", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.sendsuccessfulnotification", data.type);   
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.sendsuccessfulnotification")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.sendsuccessfulnotification")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -123,8 +123,8 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.sendsuccessfulnotification", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.end", data.type);     
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.sendsuccessfulnotification", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.end", data.type);     
     }
     
     @Test
@@ -133,7 +133,7 @@ public class UserRegistrationTest {
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body("{\"user\" : {\"email\" : \"john.doe@email.com\",  \"firstName\" : \"john\",  \"lastName\" : \"doe\"}}")
@@ -146,15 +146,15 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.generateusernameandpassword", data.type);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword", data.type);
 
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.generateusernameandpassword")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -167,14 +167,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.generateusernameandpassword", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.isuserregistered", data.type);  
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.type);  
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.isuserregistered")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.isuserregistered")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -187,8 +187,8 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.isuserregistered", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.end", data.type);   
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.end", data.type);   
           
     }
     
@@ -198,7 +198,7 @@ public class UserRegistrationTest {
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body("{\"user\" : {\"email\" : \"john.doe@email.com\",  \"firstName\" : \"john\",  \"lastName\" : \"\"}}")
@@ -211,8 +211,8 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.notifyinvaliddata", data.type);        
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.notifyinvaliddata", data.type);        
           
     }
     
@@ -222,7 +222,7 @@ public class UserRegistrationTest {
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body("{\"user\" : {\"email\" : \"mary.strong@email.com\",  \"firstName\" : \"mary\",  \"lastName\" : \"strong\"}}")
@@ -235,15 +235,15 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         EventData data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.generateusernameandpassword", data.type);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword", data.type);
 
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.generateusernameandpassword")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -256,14 +256,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.generateusernameandpassword", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.isuserregistered", data.type);  
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.generateusernameandpassword", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.type);  
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.isuserregistered")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.isuserregistered")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -276,14 +276,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.isuserregistered", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.create", data.type);   
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.create", data.type);   
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.create")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.create")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -296,14 +296,14 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.create", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.sendservererrornotification", data.type);   
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.create", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.sendservererrornotification", data.type);   
         
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
             .header("ce-id", UUID.randomUUID().toString())
-            .header("ce-type", "io.automatiko.serverless.userRegistration.sendservererrornotification")
+            .header("ce-type", "io.automatiko.serverless.userRegistration.v1_0.sendservererrornotification")
             .header("ce-source", "test")
             .header("ce-specversion", "1.0")
             .body(data.getData())
@@ -316,8 +316,8 @@ public class UserRegistrationTest {
         assertEquals(1, events.size());
         
         data = events.get(0);
-        assertEquals("io.automatiko.serverless.userRegistration.sendservererrornotification", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.end", data.type);     
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.sendservererrornotification", data.source.split("/")[0]);
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.end", data.type);     
     }
     
     // @formatter:on
