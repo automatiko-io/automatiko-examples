@@ -1,0 +1,77 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: notifications
+spec:
+  template:
+    metadata:
+      name: notifications-v1
+      annotations:
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: docker.io/automatiko/notifications
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: emailnotification
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.acme.notifications.email
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notifications
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: smsnotification
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.acme.notifications.sms
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notifications
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: slacknotification
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: com.acme.notifications.slack
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notifications
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: backgroundcheck
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: org.acme.background.checks
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: notifications
