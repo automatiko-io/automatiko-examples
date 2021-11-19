@@ -61,6 +61,8 @@ found [User registration BPMN example](user-registration) and
 Additionally there is a dedicated User Registration example that is tailored to run 
 on Google CloudRun, see  [User Registration on Google CloudRun](user-registration-gcp-cloudrun)
 
+A more advanced scenario that includes also the interaction with other services and functions
+that workflow can correlated events from can be found [omboarding](omboarding)
 
 ## Support incidents
 

@@ -1,0 +1,157 @@
+apiVersion: sources.knative.dev/v1
+kind: SinkBinding
+metadata:
+  name: bind-registration
+spec:
+  subject:
+    apiVersion: serving.knative.dev/v1
+    kind: Service
+    name: registration
+
+  sink:
+    ref:
+      apiVersion: eventing.knative.dev/v1
+      kind: Broker
+      name: default
+---
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: registration
+spec:
+  template:
+    metadata:
+      name: registration-v1
+      annotations:
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+        - image: docker.io/automatiko/registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: userregistration
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: getuser
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.getuser
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: generateusernameandpassword
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.generateusernameandpassword
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: registeruser
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.registeruser
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notifyregistered
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.notifyregistered
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: notifyservererror
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: io.automatiko.examples.userRegistration.notifyservererror
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: backgroundcheckok0
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: org.acme.background.checks.ok
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
+
+---
+apiVersion: eventing.knative.dev/v1
+kind: Trigger
+metadata:
+  name: backgroundcheckfailed1
+spec:
+  broker: default
+  filter:
+    attributes:
+      type: org.acme.background.checks.failed
+  subscriber:
+    ref:
+      apiVersion: serving.knative.dev/v1
+      kind: Service
+      name: registration
