@@ -35,5 +35,6 @@
     <module>user-registration-gcp-cloudrun</module>
     <module>support-incidents</module>
     <module>omboarding</module>
+    <module>user-registration-function</module>
   </modules>
 </project>
