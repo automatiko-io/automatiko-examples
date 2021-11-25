@@ -142,7 +142,7 @@
         </bpmn2:extensionElements>
         <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
         <bpmn2:timerEventDefinition id="TimerEventDefinition_1">
-          <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">#{reports_timer:P1D}</bpmn2:timeCycle>
+          <bpmn2:timeCycle xsi:type="bpmn2:tFormalExpression" id="FormalExpression_11">#{reports_timer:R/P1D}</bpmn2:timeCycle>
         </bpmn2:timerEventDefinition>
       </bpmn2:startEvent>
       <bpmn2:serviceTask id="ServiceTask_1" name="Send reports to building owner" implementation="Java" operationRef="Operation_1">
