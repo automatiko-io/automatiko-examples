@@ -22,7 +22,7 @@ First select proper profile to build the functon for target environment
 
 - Azure functions use `-Pazure`
 - Google Cloud Functions use `-Pgcp`
-- Amazon Lambda use `-Plambda`
+- Amazon Lambda use `-Paws-lambda`
 
 ### Azure functions
 
@@ -64,6 +64,37 @@ gcloud functions deploy automatiko-user-registration-example \
 ```
 
 This command will give you as output a `httpsTrigger.url` that points to your function.
+
+
+### AWS Lambda
+
+For AWS Lambda functions it should be build with `aws-lambda` profile
+
+```
+mvn clean package -Paws-lambda
+```
+
+And then deployed to your AWS Lambda project using `sam`
+
+```
+sam deploy -t target/sam.jvm.yaml -g
+```
+
+This command will give you output similar to following
+
+````
+---------------------------------------------------------------------------------------
+Outputs
+---------------------------------------------------------------------------------------
+Key                 UserRegistrationFunctionApi
+Description         URL for application
+Value               https://xqe0c0addh.execute-api.us-east-2.amazonaws.com/
+----------------------------------------------------------------------------------------
+````
+
+The above url can be used to trigger lambda functions by appending the context path.
+
+
 
 
 ## Use it
