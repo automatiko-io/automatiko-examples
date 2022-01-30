@@ -124,7 +124,7 @@ public class UserRegistrationTest {
         
         data = events.get(0);
         assertEquals("io.automatiko.serverless.userRegistration.v1_0.sendsuccessfulnotification", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.v1_0.end", data.type);     
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.notifysuccess-end", data.type);     
     }
     
     @Test
@@ -188,7 +188,7 @@ public class UserRegistrationTest {
         
         data = events.get(0);
         assertEquals("io.automatiko.serverless.userRegistration.v1_0.isuserregistered", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.v1_0.end", data.type);   
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.create", data.type);   
           
     }
     
@@ -317,7 +317,7 @@ public class UserRegistrationTest {
         
         data = events.get(0);
         assertEquals("io.automatiko.serverless.userRegistration.v1_0.sendservererrornotification", data.source.split("/")[0]);
-        assertEquals("io.automatiko.serverless.userRegistration.v1_0.end", data.type);     
+        assertEquals("io.automatiko.serverless.userRegistration.v1_0.notifyservererror-end", data.type);     
     }
     
     // @formatter:on
