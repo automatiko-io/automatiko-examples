@@ -131,7 +131,7 @@ public class GraphQLVerificationTest {
             .extract().path("data.get_vacations_tasks[0].id");
         
         String approve = "{\"query\":\"mutation {"
-                + "  vacations_completeTask_approval_0(parentId:\\\"mary@email.com\\\", id:\\\"travel\\\", workItemId: \\\"" + approveTaskId + "\\\", user:\\\"john@email.com\\\", data: {approved:true}) {"
+                + "  vacations_completeTask_approval_requests_0(parentId:\\\"mary@email.com\\\", id:\\\"travel\\\", workItemId: \\\"" + approveTaskId + "\\\", user:\\\"john@email.com\\\", data: {approved:true}) {"
                 + "    request {"
                 + "      key,"
                 + "      approved"
@@ -149,10 +149,10 @@ public class GraphQLVerificationTest {
         .then()
             //.log().all(true)
             .statusCode(200)
-            .body("data.vacations_completeTask_approval_0.request.approved", equalTo(true));  
+            .body("data.vacations_completeTask_approval_requests_0.request.approved", equalTo(true));  
         
         String cancel = "{\"query\":\"mutation {"
-                + "  vacations_completeTask_cancel_1(parentId:\\\"mary@email.com\\\", id:\\\"travel\\\", workItemId: \\\"" + cancelTaskId +"\\\", user:\\\"mary@email.com\\\", data: {reason:\\\"need to change my plans\\\"}) {"
+                + "  vacations_completeTask_cancel_requests_1(parentId:\\\"mary@email.com\\\", id:\\\"travel\\\", workItemId: \\\"" + cancelTaskId +"\\\", user:\\\"mary@email.com\\\", data: {reason:\\\"need to change my plans\\\"}) {"
                 + "    request {"
                 + "      key,"
                 + "      approved,"
@@ -172,7 +172,7 @@ public class GraphQLVerificationTest {
         .then()
             //.log().all(true)
             .statusCode(200)
-            .body("data.vacations_completeTask_cancel_1.request.cancelled", equalTo(true));
+            .body("data.vacations_completeTask_cancel_requests_1.request.cancelled", equalTo(true));
         
         String abortInstance = "{\"query\":\"mutation {"
                 + "  delete_vacations(id:\\\"mary@email.com\\\", user:\\\"mary@email.com\\\") {"
