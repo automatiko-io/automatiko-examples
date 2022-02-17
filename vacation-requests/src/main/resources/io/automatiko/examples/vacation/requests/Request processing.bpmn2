@@ -130,7 +130,7 @@
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_11</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_14</bpmn2:outgoing>
-      <bpmn2:script>vacation.used = vacation.used + request.length;
+      <bpmn2:script>vacation.setUsed(vacation.used + request.length);
 context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
     </bpmn2:scriptTask>
     <bpmn2:serviceTask id="ServiceTask_2" name="Notify approval" implementation="Java" operationRef="Operation_2">
@@ -218,7 +218,7 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
-      <bpmn2:script>vacation.used = vacation.used - request.length;
+      <bpmn2:script>vacation.setUsed(vacation.used - request.length);
 request.cancelled = true;
 
 context.setVariable(&quot;request&quot;, request);
@@ -307,7 +307,7 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
       </bpmn2:extensionElements>
       <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
       <bpmn2:outgoing>SequenceFlow_15</bpmn2:outgoing>
-      <bpmn2:script>vacation.used = vacation.used - request.length;
+      <bpmn2:script>vacation.setUsed(vacation.used - request.length);
 request.cancelled = true;
 
 context.setVariable(&quot;request&quot;, request);
@@ -436,7 +436,7 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="BPMNShape_DataObject_5" bpmnElement="reason">
         <dc:Bounds height="50.0" width="36.0" x="90.0" y="443.0"/>
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel id="BPMNLabel_19">
           <dc:Bounds height="11.0" width="28.0" x="94.0" y="493.0"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
@@ -577,7 +577,7 @@ context.setVariable(&quot;vacation&quot;, vacation);</bpmn2:script>
         <di:waypoint xsi:type="dc:Point" x="214.0" y="366.0"/>
         <di:waypoint xsi:type="dc:Point" x="214.0" y="468.0"/>
         <di:waypoint xsi:type="dc:Point" x="126.0" y="468.0"/>
-        <bpmndi:BPMNLabel/>
+        <bpmndi:BPMNLabel id="BPMNLabel_37"/>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
     <bpmndi:BPMNLabelStyle id="BPMNLabelStyle_1">

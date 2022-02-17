@@ -18,4 +18,12 @@ public class Vacation extends PanacheEntity {
         return "Vacation [eligible=" + eligible + ", used=" + used + "]";
     }
 
+    public int getUsed() {
+        return used;
+    }
+
+    public void setUsed(int used) {
+        this.used = used;
+    }
+
 }
