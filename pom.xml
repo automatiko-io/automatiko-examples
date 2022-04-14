@@ -14,8 +14,8 @@
     <maven.compiler.target>11</maven.compiler.target>
     <maven.compiler.source>11</maven.compiler.source>
 
-    <quarkus.version>2.7.5.Final</quarkus.version>
-    <camel.version>2.7.0</camel.version>
+    <quarkus.version>2.8.0.Final</quarkus.version>
+    <camel.version>2.8.0</camel.version>
     <automatiko.version>${project.version}</automatiko.version>
     <wiremock.version>2.27.2</wiremock.version>
 
@@ -29,7 +29,7 @@
     <module>vacation-requests</module>
     <module>weather-conditions</module>
     <module>document-processor</module>
-    <module>mysql-operator</module>
+    <!-- <module>mysql-operator</module> -->
     <module>user-registration</module>
     <module>user-registration-sw</module>
     <module>user-registration-gcp-cloudrun</module>
