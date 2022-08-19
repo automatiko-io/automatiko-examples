@@ -36,5 +36,6 @@
     <module>support-incidents</module>
     <module>omboarding</module>
     <module>user-registration-function</module>
+    <module>workflows-java-dsl</module>
   </modules>
 </project>
