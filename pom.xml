@@ -37,5 +37,6 @@
     <module>omboarding</module>
     <module>user-registration-function</module>
     <module>workflows-java-dsl</module>
+    <module>user-registration-javadsl</module>
   </modules>
 </project>

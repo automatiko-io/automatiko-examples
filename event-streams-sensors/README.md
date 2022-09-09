@@ -14,7 +14,7 @@ The only thing that is needed is MQTT broker running that will be accessible. It
 
 once this is done you can see the fully described service at:
 
-http://localhost:8080/swagger-ui/#/
+http://localhost:8080/q/swagger-ui/#/
 
 In addition to that, service is equipped with tiny ui that helps to visualise the service data, can be accessed at 
 

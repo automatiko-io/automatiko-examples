@@ -18,7 +18,7 @@ See complete description of this example [here](https://automatikio.com/componen
 
 once this is done you can see the fully described service at:
 
-http://localhost:8080/swagger-ui/#/
+http://localhost:8080/q/swagger-ui/#/
 
 In addition to that, service is equipped with tiny ui that helps to visualise the service data, can be accessed at 
 

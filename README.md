@@ -70,3 +70,18 @@ Support incidents is implementing `Human Centric` use case backed by Apache Cass
 
 Complete example description and instructions can be
 found [Support incidents example](support-incidents).
+
+## User registration (Java DSL)
+
+User registration is implementing `Service Orchestration` use case in a form of
+workflow as a service that defines workflow with Java DSL.
+
+Complete example description and instructions can be
+found [User registration Java DSL](user-registration-javadsl)
+
+## Java DSL samples
+
+Set of examples how to define workflows with Java DSL
+
+Complete example description and instructions can be
+found [Workflow samples with Java DSL](workflow-java-dsl)
