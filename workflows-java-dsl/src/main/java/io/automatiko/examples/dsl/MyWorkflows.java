@@ -3,7 +3,10 @@ package io.automatiko.examples.dsl;
 import static io.automatiko.engine.workflow.base.core.context.variable.Variable.INPUT_TAG;
 import static io.automatiko.engine.workflow.base.core.context.variable.Variable.OUTPUT_TAG;
 
+import java.util.List;
+
 import io.automatiko.engine.api.Workflows;
+import io.automatiko.engine.workflow.base.core.context.variable.Variable;
 import io.automatiko.engine.workflow.builder.JoinNodeBuilder;
 import io.automatiko.engine.workflow.builder.RestServiceNodeBuilder;
 import io.automatiko.engine.workflow.builder.ServiceNodeBuilder;
@@ -112,6 +115,32 @@ public class MyWorkflows {
                 .users("john").outputToDataObject("value", "y").then()
                 .user("Second Task").users("john").dataObjectAsInput("x").then()
                 .end("done");
+
+        return builder;
+    }
+
+    public WorkflowBuilder workfloToAppendToListDataObject() {
+
+        WorkflowBuilder builder = WorkflowBuilder.newWorkflow("appender", "Sample workflow with task output expressions", "1")
+                .dataObject("greeting", String.class, Variable.OUTPUT_TAG)
+                .dataObject("bucket", List.class, Variable.AUTO_INITIALIZED_TAG, Variable.OUTPUT_TAG);
+
+        String name = builder.dataObject(String.class, "name");
+
+        SplitNodeBuilder split = builder.start("start here").then()
+                .log("execute script", "Hello world").thenSplit("gateway");
+
+        ServiceNodeBuilder service = split.when(() -> name != null).service("greet");
+
+        service.appendToDataObjectField("bucket",
+                service.type(MyService.class).sayHello(service.expressionAsInput(() -> name))).then()
+                .end("that's it");
+
+        split.when(() -> name == null).log("missing name", "missing name").then().endWithError("error").error("bad data", "412")
+                .expressionAsInput(Customer.class, () -> new io.automatiko.examples.dsl.Customer());
+
+        builder.additionalPathOnMessage("on message").topic("data").appendToDataObjectField("bucket").then()
+                .log("show bucket", "bucket is {}", "bucket").then().end("done");
 
         return builder;
     }
