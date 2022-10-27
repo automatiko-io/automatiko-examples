@@ -19,7 +19,8 @@ public class MessageWorkflows {
                 .log("log", "About to wait for events")
                 .thenSplitOnEvents("wait for events");
 
-        split.onMessage("events").toDataObject("customer").then().log("after message", "Message arrived").then()
+        split.onMessage("events").connector("kafka").toDataObject("customer").then().log("after message", "Message arrived")
+                .then()
                 .end("done on message");
         split.onTimer("timeout").after(30, TimeUnit.SECONDS).then().log("after timeout", "Timer fired").then()
                 .end("done on timeout");
@@ -32,15 +33,15 @@ public class MessageWorkflows {
         WorkflowBuilder builder = WorkflowBuilder.newWorkflow("messages",
                 "Sample workflow with with Apache Kafka messages (consume and produce)");
         builder.dataObject("customer", Customer.class)
-                .startOnMessage("customers").toDataObject("customer").topic("customers")
+                .startOnMessage("customers").connector("kafka").toDataObject("customer").topic("customers")
                 .then()
-                .sendMessage("new message").fromDataObject("customer").topic("published")
+                .sendMessage("new message").connector("kafka").fromDataObject("customer").topic("published")
                 .then()
                 .log("log message", "Logged customer with id {}", "customer")
                 .then()
-                .waitOnMessage("updates").toDataObject("customer")
+                .waitOnMessage("updates").connector("kafka").toDataObject("customer")
                 .then()
-                .endWithMessage("done").fromDataObject("customer");
+                .endWithMessage("done").connector("kafka").fromDataObject("customer");
 
         return builder;
     }
@@ -54,12 +55,13 @@ public class MessageWorkflows {
         builder.listDataObject("customers", Customer.class)
                 .start("customers")
                 .then()
-                .sendMessage("new message").topic("published").repeat("customers", "item")
+                .sendMessage("new message").connector("kafka").topic("published").repeat("customers", "item")
                 .expressionAsInput(String.class, () -> item.getCustomerId())
                 .then()
                 .log("log message", "Logged customer")
                 .then()
-                .endWithMessage("lastUpdate").topic("published").expressionAsInput(String.class, () -> "completed");
+                .endWithMessage("lastUpdate").connector("kafka").topic("published")
+                .expressionAsInput(String.class, () -> "completed");
 
         return builder;
     }
