@@ -132,8 +132,7 @@
       </build>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.additional-build-args>--report-unsupported-elements-at-runtime,
-          --allow-incomplete-classpath</quarkus.native.additional-build-args>
+        <quarkus.native.additional-build-args>--report-unsupported-elements-at-runtime</quarkus.native.additional-build-args>
       </properties>
     </profile>
     <profile>
@@ -191,8 +190,7 @@
       </build>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
-        <quarkus.native.additional-build-args>--report-unsupported-elements-at-runtime,
-          --allow-incomplete-classpath</quarkus.native.additional-build-args>
+        <quarkus.native.additional-build-args>--report-unsupported-elements-at-runtime</quarkus.native.additional-build-args>
         <quarkus.native.container-build>true</quarkus.native.container-build>
       </properties>
     </profile>
