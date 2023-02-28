@@ -10,7 +10,7 @@ This examples illustrates how a workflow is sliced into functions that are compo
 the actual logic steered by the workflow definition. Yet each function can be invoked at anytime making the workflow to
 act as a definition that can start at any place and continue according to defined flow of activities eka functions.
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/userregistration.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/userregistration.html)
 
 ## Run it
 

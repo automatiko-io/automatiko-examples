@@ -4,7 +4,7 @@
 
 this is an example showing batch processing use cases backed by workflow. It uses Automatiko project to build self described service.
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/batch.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/batch.html)
 
 ## Run it
 

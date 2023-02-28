@@ -9,7 +9,7 @@ emplyee requesting vacations. It takes advantage of workflow features such as
 - tracking - all vacation requests submitted are tracked
 - user interactions - tasks are assigned to individuals to take actions when needed
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/vacations.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/vacations.html)
 
 ## Run it
 

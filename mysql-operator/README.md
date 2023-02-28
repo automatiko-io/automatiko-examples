@@ -4,7 +4,7 @@
 
 this is an example showing Kubernetes Operator use cases backed by workflow. It uses Automatiko project to build self described service.
 
-See complete description of this example [here](https://automatikio.com/component-main/0.3.0/examples/operator.html)
+See complete description of this example [here](https://docs.automatiko.io/main0.3.0/examples/operator.html)
 
 ## Run it
 

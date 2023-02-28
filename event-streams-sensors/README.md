@@ -4,13 +4,13 @@
 
 this is an example showing event stream use cases backed by workflow for IoT. It uses Automatiko project to build self described service that makes use of MQTT broker as event source.
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/leaks.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/leaks.html)
 
 ## Run it
 
 The only thing that is needed is MQTT broker running that will be accessible. It needs to be given as part of run command via environment variable `MQTT_SERVER` and `MQTT_PORT`
 
-`docker run -e MQTT_SERVER=MQTT_HOST -e MQTT_PORT=1883 -p 8080:8080 automatik/event-streams-sensors`
+`docker run -e MQTT_SERVER=MQTT_HOST -e MQTT_PORT=1883 -p 8080:8080 automatiko/event-streams-sensors`
 
 once this is done you can see the fully described service at:
 

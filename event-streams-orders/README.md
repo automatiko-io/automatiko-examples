@@ -4,13 +4,15 @@
 
 this is an example showing event stream use cases backed by workflow. It uses Automatiko project to build self described service that makes use of Apache Kafka as event source.
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/orders.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/orders.html)
 
 ## Run it
 
-The only thing that is needed is Apache Kafka running that will be accessible. It needs to be given as part of run command via environment variable `KAFKA_SERVERS`
+The only thing that is needed is Apache Kafka running that will be accessible.
+Redpanda can be used as Kafka broker, see installation instructions [here](https://docs.redpanda.com/docs/get-started/quick-start/?quickstart=docker#deploy-redpanda).
+Kafka broker needs to be given as part of run command via environment variable `KAFKA_BOOTSTRAP_SERVERS`
 
-`docker run -e KAFKA_SERVERS=KAFKA_HOST:9092 -p 8080:8080 automatik/event-streams-orders`
+`docker run -e KAFKA_BOOTSTRAP_SERVERS=KAFKA_HOST:9092 -p 8080:8080 automatiko/event-streams-orders`
 
 once this is done you can see the fully described service at:
 

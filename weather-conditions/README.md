@@ -5,7 +5,7 @@
 this is an example showing service orchestration use case. It implements common scenario for workflows -
 that multiple services needs to be invoked and depending on the results another set of services might be called again.
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/weather.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/weather.html)
 
 ## Run it
 

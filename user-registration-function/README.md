@@ -6,7 +6,7 @@ this is an example showing workflow as a function use case. It implements common
 that performs various checks and registers users in the Swagger PetStore service.
 
 
-See complete description of this example [here](https://automatikio.com/component-main/0.0.0/examples/userregistration-function.html)
+See complete description of this example [here](https://docs.automatiko.io/main/0.0.0/examples/userregistration-function.html)
 
 ## Run it
 

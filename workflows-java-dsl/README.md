@@ -4,7 +4,7 @@
 
 This is a set of sample workflows illustrating use of Workflow Java DSL of Automatiko.
 
-Take a look at the getting started with Workflow Java DSL [here](https://automatikio.com/component-main/0.0.0/getting-started-code.html)
+Take a look at the getting started with Workflow Java DSL [here](https://docs.automatiko.io/main/0.0.0/getting-started-code.html)
 
 Samples covered:
 
