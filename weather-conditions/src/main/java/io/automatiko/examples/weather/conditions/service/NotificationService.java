@@ -1,6 +1,6 @@
 package io.automatiko.examples.weather.conditions.service;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.engine.api.workflow.workitem.WorkItemExecutionError;
 

@@ -2,10 +2,10 @@ package io.automatiko.examples.vacation.requests;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 

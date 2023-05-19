@@ -3,7 +3,7 @@ package io.automatiko.examples.orders.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.examples.orders.ChangeSet;
 import io.automatiko.examples.orders.Item;

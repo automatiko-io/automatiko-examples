@@ -1,6 +1,6 @@
 package io.automatiko.examples.vacation.requests.service;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.examples.vacation.requests.Employee;
 import io.automatiko.examples.vacation.requests.Request;

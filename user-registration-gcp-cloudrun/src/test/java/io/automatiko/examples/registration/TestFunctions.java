@@ -1,6 +1,6 @@
 package io.automatiko.examples.registration;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
