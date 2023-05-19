@@ -10,15 +10,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import io.quarkus.mailer.Mail;
 import io.quarkus.mailer.MockMailbox;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import io.vertx.ext.mail.MailMessage;
+import jakarta.inject.Inject;
 
 @QuarkusTest
 public class VerificationTests {
@@ -121,10 +120,10 @@ public class VerificationTests {
         assertNotNull(vacation);
         
         // verify that emails were sent
-        List<Mail> sent = mailbox.getMessagesSentTo("mary@email.com");
+        List<MailMessage> sent = mailbox.getMailMessagesSentTo("mary@email.com");
         assertEquals(1, sent.size());
 
-        sent = mailbox.getMessagesSentTo("john@email.com");
+        sent = mailbox.getMailMessagesSentTo("john@email.com");
         assertEquals(1, sent.size());
 
         assertEquals(2, mailbox.getTotalMessagesSent());
@@ -254,18 +253,18 @@ public class VerificationTests {
     public void testProcessExecutionMultipleRequestsApproved() {
         String employee = "{\n"
                 + "  \"employee\": {\n"
-                + "    \"email\": \"mary@email.com\",\n"
+                + "    \"email\": \"joe@email.com\",\n"
                 + "    \"firstName\": \"Mary\",\n"
                 + "    \"lastName\": \"Jane\",\n"
                 + "    \"startedAt\": \"1999-12-26\",\n"
                 + "    \"department\": \"finance\"\n"
                 + "  }\n"
                 + "}";
-        String id = "mary@email.com";
+        String id = "joe@email.com";
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
             .body(employee)
         .when()
             .post("/vacations")
@@ -274,7 +273,7 @@ public class VerificationTests {
         
         Map data = given()
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
         .when()
             .get("/vacations/" + id)
         .then()
@@ -301,7 +300,7 @@ public class VerificationTests {
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
             .body("{\n"
                     + "  \"from\": \"2020-12-26\",\n"
                     + "  \"length\": 5,\n"
@@ -315,7 +314,7 @@ public class VerificationTests {
         
         data = given()
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
         .when()
             .get("/vacations/" + id)
         .then()            
@@ -359,11 +358,11 @@ public class VerificationTests {
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
             .body("{\n"
-                    + "  \"from\": \"2020-12-26\",\n"
+                    + "  \"from\": \"2020-12-16\",\n"
                     + "  \"length\": 5,\n"
-                    + "  \"to\": \"2020-12-31\",\n"
+                    + "  \"to\": \"2020-12-21\",\n"
                     + "  \"key\": \"travel\"\n"
                     + "}")
         .when()
@@ -375,11 +374,11 @@ public class VerificationTests {
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
             .body("{\n"
-                    + "  \"from\": \"2020-12-26\",\n"
+                    + "  \"from\": \"2020-12-06\",\n"
                     + "  \"length\": 5,\n"
-                    + "  \"to\": \"2020-12-31\",\n"
+                    + "  \"to\": \"2020-12-11\",\n"
                     + "  \"key\": \"work\"\n"
                     + "}")
         .when()
@@ -389,7 +388,7 @@ public class VerificationTests {
         
         data = given()
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
         .when()
             .get("/vacations/" + id)
         .then()            
@@ -408,11 +407,11 @@ public class VerificationTests {
         given()
             .contentType(ContentType.JSON)
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
             .body("{\n"
-                    + "  \"from\": \"2020-12-26\",\n"
+                    + "  \"from\": \"2020-11-26\",\n"
                     + "  \"length\": 15,\n"
-                    + "  \"to\": \"2020-12-31\",\n"
+                    + "  \"to\": \"2020-11-30\",\n"
                     + "  \"key\": \"training\"\n"
                     + "}")
         .when()
@@ -422,7 +421,7 @@ public class VerificationTests {
         
         data = given()
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
         .when()
             .get("/vacations/" + id)
         .then()            
@@ -467,7 +466,7 @@ public class VerificationTests {
         
         data = given()
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
         .when()
             .get("/vacations/" + id)
         .then()            
@@ -486,7 +485,7 @@ public class VerificationTests {
         given()
             .accept(ContentType.JSON)
             .contentType(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
             .body("{}")
         .when()
             .post("/vacations/" + id + "/resigned")
@@ -495,7 +494,7 @@ public class VerificationTests {
         
         given()
             .accept(ContentType.JSON)
-            .auth().basic("mary@email.com", "mary")
+            .auth().basic("joe@email.com", "joe")
         .when()
             .get("/vacations")
         .then().statusCode(200)

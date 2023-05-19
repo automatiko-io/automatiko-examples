@@ -7,10 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-
 import com.datastax.oss.driver.api.core.CqlSession;
 import com.datastax.oss.driver.api.core.servererrors.QueryExecutionException;
 import com.datastax.oss.driver.api.core.type.DataTypes;
@@ -24,6 +20,9 @@ import io.automatiko.engine.api.event.EventPublisher;
 import io.automatiko.engine.services.event.ProcessInstanceDataEvent;
 import io.automatiko.engine.services.event.impl.ProcessInstanceEventBody;
 import io.automatiko.examples.support.incidents.Incident;
+import jakarta.annotation.PostConstruct;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class SupportIncidentsIndex implements EventPublisher {

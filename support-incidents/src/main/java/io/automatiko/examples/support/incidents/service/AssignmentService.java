@@ -1,6 +1,6 @@
 package io.automatiko.examples.support.incidents.service;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.examples.support.incidents.Incident;
 

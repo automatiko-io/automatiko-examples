@@ -2,9 +2,9 @@ package io.automatiko.examples.vacation.requests;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.Entity;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 

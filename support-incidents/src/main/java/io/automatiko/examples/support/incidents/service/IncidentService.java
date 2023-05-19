@@ -3,7 +3,7 @@ package io.automatiko.examples.support.incidents.service;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.examples.support.incidents.Comment;
 import io.automatiko.examples.support.incidents.Incident;

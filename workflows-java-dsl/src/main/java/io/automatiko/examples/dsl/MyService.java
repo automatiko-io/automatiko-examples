@@ -2,7 +2,7 @@ package io.automatiko.examples.dsl;
 
 import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
 public class MyService {

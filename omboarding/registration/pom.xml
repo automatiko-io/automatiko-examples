@@ -31,10 +31,6 @@
     
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-reactive</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
       <artifactId>quarkus-rest-client-reactive-jackson</artifactId>
     </dependency>
 
@@ -50,7 +46,7 @@
     </dependency>
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
-      <artifactId>wiremock-jre8</artifactId>
+      <artifactId>wiremock-jre8-standalone</artifactId>
       <version>${wiremock.version}</version>
       <scope>test</scope>
       </dependency>

@@ -1,6 +1,6 @@
 package io.automatiko.examples.registration.service;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.engine.app.rest.model.User;
 

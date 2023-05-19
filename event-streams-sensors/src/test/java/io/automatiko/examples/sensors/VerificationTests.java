@@ -13,11 +13,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import org.eclipse.microprofile.reactive.messaging.Message;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
@@ -26,10 +21,14 @@ import io.automatiko.engine.api.event.EventPublisher;
 import io.automatiko.engine.services.event.impl.CountDownProcessInstanceEventPublisher;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import io.smallrye.reactive.messaging.memory.InMemoryConnector;
+import io.smallrye.reactive.messaging.memory.InMemorySink;
+import io.smallrye.reactive.messaging.memory.InMemorySource;
 import io.smallrye.reactive.messaging.mqtt.MqttMessage;
-import io.smallrye.reactive.messaging.providers.connectors.InMemoryConnector;
-import io.smallrye.reactive.messaging.providers.connectors.InMemorySink;
-import io.smallrye.reactive.messaging.providers.connectors.InMemorySource;
+import jakarta.enterprise.inject.Any;
+import jakarta.enterprise.inject.Produces;
+import jakarta.inject.Inject;
+import jakarta.inject.Singleton;
 
 @QuarkusTest
 public class VerificationTests {

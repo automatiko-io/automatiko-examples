@@ -11,13 +11,13 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <maven.compiler.target>11</maven.compiler.target>
-    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
 
-    <quarkus.version>2.16.2.Final</quarkus.version>
-    <camel.version>2.16.0</camel.version>
+    <quarkus.version>3.1.0.Final</quarkus.version>
+    <camel.version>3.0.0-M2</camel.version>
     <automatiko.version>${project.version}</automatiko.version>
-    <wiremock.version>2.27.2</wiremock.version>
+    <wiremock.version>2.35.0</wiremock.version>
 
     <swagger-plugin.version>2.1.0</swagger-plugin.version>
     <version.surefire.plugin>3.0.0-M5</version.surefire.plugin>

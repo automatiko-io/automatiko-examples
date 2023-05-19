@@ -2,7 +2,7 @@ package io.automatiko.examples.orders.services;
 
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import io.automatiko.examples.orders.Item;
 import io.automatiko.examples.orders.Order;

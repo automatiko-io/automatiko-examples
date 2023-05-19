@@ -3,7 +3,7 @@ package io.automatiko.examples.registration;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
