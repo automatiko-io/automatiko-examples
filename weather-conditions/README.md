@@ -10,10 +10,10 @@ See complete description of this example [here](https://docs.automatiko.io/main/
 ## Run it
 
 The only thing that is needed is Jaeger (for observability/opentracing) running that will be accessible. One can be 
-started with
+started with is configured in docker compose file in this example, just execute:
 
 ````
-docker run -p 5775:5775/udp -p 6831:6831/udp -p 6832:6832/udp -p 5778:5778 -p 16686:16686 -p 14268:14268 jaegertracing/all-in-one:latest
+docker-compose up -d
 ````
 
 NOTE: To run this service API keys for [IPSTACK](https://ipstack.com/) and [Open Weather API](https://openweathermap.org/) is required. These can be freely obtained from the websites.
