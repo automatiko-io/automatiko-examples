@@ -14,7 +14,7 @@
     <maven.compiler.target>17</maven.compiler.target>
     <maven.compiler.source>17</maven.compiler.source>
 
-    <quarkus.version>3.2.2.Final</quarkus.version>
+    <quarkus.version>3.4.0</quarkus.version>
     <camel.version>3.0.0-RC2</camel.version>
     <automatiko.version>${project.version}</automatiko.version>
     <wiremock.version>2.35.0</wiremock.version>
@@ -32,7 +32,7 @@
     <module>mysql-operator</module>
     <module>user-registration</module>
     <module>user-registration-sw</module>
-    <module>user-registration-gcp-cloudrun</module>
+    <!--module>user-registration-gcp-cloudrun</module-->
     <module>support-incidents</module>
     <module>omboarding</module>
     <module>user-registration-function</module>
