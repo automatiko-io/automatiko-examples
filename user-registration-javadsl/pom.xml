@@ -37,12 +37,7 @@
     
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-rest-client-reactive-jackson</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-smallrye-opentracing</artifactId>
+      <artifactId>quarkus-rest-client-jackson</artifactId>
     </dependency>
     
     <!-- automatiko process management addon - optional -->
