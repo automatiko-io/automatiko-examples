@@ -274,4 +274,67 @@ public class VerificationTest {
         }
     }
 
+    @Test
+    public void testDirectMessagingWorkflow() {
+
+        String addPayload = "{\n"
+                + "  \"customer\": {\n"
+                + "    \"customerId\": \"string\"\n"
+                + "  }\n"
+                + "}";
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(addPayload)
+                .when()
+                .post("/senddirectmessages")
+                .then()
+                //.log().body(true)
+                .statusCode(200)
+                .body("id", notNullValue());
+
+        given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("/senddirectmessages?status=completed")
+                .then().statusCode(200)
+                .body("$.size()", is(1));
+
+        given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("/receivedirectmessages?status=completed")
+                .then().statusCode(200)
+                .body("$.size()", is(0));
+
+        addPayload = "{\n"
+                + "  \"customer\": {\n"
+                + "    \"customerId\": \"123\"\n"
+                + "  }\n"
+                + "}";
+        given()
+                .contentType(ContentType.JSON)
+                .accept(ContentType.JSON)
+                .body(addPayload)
+                .when()
+                .post("/senddirectmessages")
+                .then()
+                //.log().body(true)
+                .statusCode(200)
+                .body("id", notNullValue());
+
+        given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("/senddirectmessages?status=completed")
+                .then().statusCode(200)
+                .body("$.size()", is(2));
+
+        given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("/receivedirectmessages?status=completed")
+                .then().statusCode(200)
+                .body("$.size()", is(1));
+    }
 }
