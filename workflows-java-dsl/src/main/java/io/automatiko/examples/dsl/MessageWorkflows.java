@@ -1,5 +1,7 @@
 package io.automatiko.examples.dsl;
 
+import static io.automatiko.engine.workflow.base.core.context.variable.Variable.INPUT_TAG;
+
 import java.util.concurrent.TimeUnit;
 
 import io.automatiko.engine.api.Workflows;
@@ -62,6 +64,39 @@ public class MessageWorkflows {
                 .then()
                 .endWithMessage("lastUpdate").connector("kafka").topic("published")
                 .expressionAsInput(String.class, () -> "completed");
+
+        return builder;
+    }
+
+    public WorkflowBuilder receiveMessagesDirect() {
+
+        WorkflowBuilder builder = WorkflowBuilder.newWorkflow("receivedirectmessages",
+                "Sample workflow with direct messages (consume and produce)");
+        builder.dataObject("customer", Customer.class)
+                .startOnMessage("Receive data from channel").connector(WorkflowBuilder.Connectors.DIRECT).channel("mydata")
+                .toDataObject("customer")
+                .filter((eventData, message) -> ((Customer) eventData).getCustomerId().equals("123"))
+                .then()
+                .log("log message", "DIRECT:: Logged customer with id {}", "customer")
+                .then()
+                .end("done");
+
+        return builder;
+    }
+
+    public WorkflowBuilder sendMessagesDirect() {
+
+        WorkflowBuilder builder = WorkflowBuilder.newWorkflow("senddirectmessages",
+                "Sample workflow with direct messages (consume and produce)");
+        builder.dataObject("customer", Customer.class, INPUT_TAG)
+                .start("start")
+                .then()
+                .sendMessage("send message to channel").connector(WorkflowBuilder.Connectors.DIRECT).channel("mydata")
+                .fromDataObject("customer")
+                .then()
+                .log("log message", "DIRECT:: Logged customer with id {}", "customer")
+                .then()
+                .end("done");
 
         return builder;
     }
