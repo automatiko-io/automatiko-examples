@@ -4,7 +4,7 @@
   <parent>
     <groupId>io.automatiko.examples</groupId>
     <artifactId>automatiko-examples</artifactId>
-    <version>0.40.0</version>
+    <version>0.41.0</version>
   </parent>
   <artifactId>document-processor</artifactId>
 
