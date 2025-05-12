@@ -102,7 +102,7 @@
       </activation>
 
       <properties>
-        <azure.functions.maven.plugin.version>1.37.1</azure.functions.maven.plugin.version>
+        <azure.functions.maven.plugin.version>1.38.0</azure.functions.maven.plugin.version>
         <resources-plugin.version>3.3.1</resources-plugin.version>
         <functionAppName>automatiko-user-registration-example</functionAppName>
         <functionAppRegion>westus</functionAppRegion>
