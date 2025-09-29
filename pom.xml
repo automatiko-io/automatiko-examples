@@ -15,7 +15,7 @@
     <maven.compiler.source>17</maven.compiler.source>
 
     <quarkus.version>3.28.0</quarkus.version>
-    <camel.version>3.26.0</camel.version>
+    <camel.version>3.27.0</camel.version>
     <automatiko.version>${project.version}</automatiko.version>
     <wiremock.version>2.35.2</wiremock.version>
 
