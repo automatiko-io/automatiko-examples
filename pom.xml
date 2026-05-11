@@ -17,7 +17,7 @@
     <quarkus.version>3.35.1</quarkus.version>
     <camel.version>3.35.0</camel.version>
     <automatiko.version>${project.version}</automatiko.version>
-    <wiremock.version>2.35.2</wiremock.version>
+    <wiremock.version>3.0.1</wiremock.version>
 
     <swagger-plugin.version>2.1.0</swagger-plugin.version>
     <version.surefire.plugin>3.0.0-M5</version.surefire.plugin>
